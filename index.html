@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antony & Shantha — 60th Anniversary & 80th Birthday</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* --- Custom Gold & Vintage Styling --- */
+    .gold { color: #b78b1e; }
+    .gold-light { color: #d4af37; }
+    .gold-border { border-color: rgba(183,139,30,0.4); }
+    .vintage-filter { filter: sepia(0.08) contrast(1.05) brightness(1.02); }
+    .soft-shadow { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .elegant { font-family: "Playfair Display", serif; }
+    .fade-in { animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Background: Aged Paper Texture --- */
+    body {
+      background-color: #fdfbf7;
+      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+                        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-size: 6px 6px, 400px 400px;
+    }
+
+    /* --- Decorative Divider --- */
+    .divider {
+      display: inline-block;
+      width: 80px;
+      height: 20px;
+      background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg');
+      opacity: 0.85;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body class="text-gray-800 antialiased selection:bg-yellow-100 selection:text-yellow-900">
+  <main class="min-h-screen flex items-center justify-center py-12 px-6">
+    <div class="max-w-3xl w-full bg-white/90 rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm">
+
+      <!-- Header -->
+      <header class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl elegant gold">Antony &amp; Shantha</h1>
+        <p class="mt-2 text-lg md:text-xl text-gray-700 italic">
+          Celebrating 60 years of love<br>and Shantha’s 80th Birthday
+        </p>
+        <div class="mt-4 text-sm text-gray-600 tracking-wide">
+          23<sup>rd</sup> December 2025 • Avenue Regent, Kochi
+        </div>
+        <div class="mt-5 divider mx-auto"></div>
+      </header>
+
+      <!-- Photo Section -->
+      <div class="rounded-2xl overflow-hidden vintage-filter mb-8 soft-shadow">
+        <img src="photos/photo1.jpg" alt="Antony & Shantha" class="w-full h-72 object-cover">
+      </div>
+
+      <!-- Message -->
+      <section class="text-center">
+        <h2 class="text-2xl md:text-3xl elegant gold mb-4">A Lifetime of Love</h2>
+        <div class="divider mx-auto mb-4"></div>
+        <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
+          Join us as we honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> — 
+          celebrating <strong>60 years of cherished togetherness</strong> and the <strong>80th birthday</strong> 
+          of our beloved Shantha. Their journey has been a story of love, faith, and laughter that continues 
+          to light up all our lives.
+        </p>
+      </section>
+
+      <!-- Details -->
+      <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
+        <div class="border border-gray-200 rounded-xl py-4 bg-white/60">
+          <h3 class="text-sm uppercase text-gray-500 tracking-wider">When</h3>
+          <p class="mt-1 text-gray-800 font-medium">23<sup>rd</sup> December 2025<br>5:00 PM onwards</p>
+        </div>
+        <div class="border border-gray-200 rounded-xl py-4 bg-white/60">
+          <h3 class="text-sm uppercase text-gray-500 tracking-wider">Where</h3>
+          <p class="mt-1 text-gray-800 font-medium">Avenue Regent, Kochi</p>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="mailto:rsvp@family.com?subject=RSVP%20-%20Antony%20%26%20Shantha"
+           class="px-6 py-3 rounded-lg border border-yellow-500 bg-yellow-50 text-yellow-800 font-medium hover:bg-yellow-100 transition">
+          RSVP via Email
+        </a>
+        <button onclick="window.print()"
+           class="px-6 py-3 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition">
+          Print Invitation
+        </button>
+      </div>
+
+      <!-- Dress Code -->
+      <div class="mt-8 text-sm text-gray-600 text-center">
+        <p><strong>Dress Code:</strong> Gold &amp; White — Vintage Elegant</p>
+        <p class="mt-2 max-w-xl mx-auto">
+          Please arrive 15 minutes early. Your presence is the greatest gift — 
+          if you wish, share a note or memory for the couple to cherish.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-10 text-center text-gray-500 text-sm italic">
+        <div class="divider mx-auto mb-3"></div>
+        <p>With love and gratitude — The Family of Antony &amp; Shantha</p>
+      </footer>
+
+    </div>
+  </main>
+</body>
+</html>
