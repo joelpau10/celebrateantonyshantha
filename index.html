@@ -76,7 +76,7 @@
       margin: 3rem 0;
     }
     .divider::before {
-      content: "";
+      content: "❦";
       position: absolute;
       top: -18px;
       left: 50%;
@@ -85,10 +85,6 @@
       color: var(--gold);
     }
 
-    /* Rest of styles unchanged for brevity */
-    .message-card, .timeline-title, .vine-container, #vine-path path, .vine-bullet, .timeline-item, #paper-plane { 
-      /* (keeping all your perfect styling from before) */
-    }
     .vine-container { position: relative; padding: 10rem 0 20rem; overflow: hidden; }
     #vine-path { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
     #vine-path path { stroke: var(--gold-dark); stroke-width: 2.8; fill: none; stroke-dasharray: 12 16; opacity: 0.8; }
@@ -116,7 +112,7 @@
             Kuttan & Shantha
           </h1>
           
-          <!-- EXACTLY WHAT YOU WANTED -->
+          <!-- EXACTLY YOUR WORDS + EMOJIS -->
           <p class="subtitle-60years mb-10">
             60 years of love Heart and Shantha’s 80th birthday Cake
           </p>
@@ -125,7 +121,6 @@
           <p class="text-xl md:text-2xl playfair font-medium text-gold-dark">Dear Family & Friends</p>
         </header>
 
-        <!-- Rest of your invitation (unchanged) -->
         <section class="grid md:grid-cols-2 gap-8 mb-16">
           <div class="message-card">
             Six decades of togetherness,<br>
@@ -152,8 +147,8 @@
         </section>
 
         <div class="grid md:grid-cols-2 gap-8 mb-16">
-          <img src="photos/photo1.jpg?t=202512310006" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
-          <img src="photos/photo2.jpg?t=202512310006" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo1.jpg?t=202512310007" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo2.jpg?t=202512310007" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
         </div>
 
         <div class="text-center mb-16">
@@ -203,8 +198,9 @@
           <div class="timeline-item" style="top: 72%;">3:30 PM — Closing & Group Photos</div>
         </section>
 
+        <!-- DRESS CODE → Dress Code (proper case) -->
         <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg text-center">
-          <h2 class="text-4xl playfair text-gold-bright mb-8">DRESS CODE</h2>
+          <h2 class="text-4xl playfair text-gold-bright mb-8">Dress Code</h2>
           <p class="text-xl text-gold-dark">
             Smart casuals / Kerala ethnic wear
           </p>
@@ -220,7 +216,6 @@
     </div>
   </div>
 
-  <!-- Paper plane script (unchanged) -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const plane = document.getElementById('paper-plane');
