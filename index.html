@@ -6,9 +6,8 @@
   <title>Kuttan & Shantha — 60th Anniversary & 80th Birthday</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind + Alpine -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -29,10 +28,23 @@
     }
     .playfair { font-family: 'Playfair Display', serif; }
     .great-vibes { font-family: 'Great Vibes', cursive; }
+    .dancing { font-family: 'Dancing Script', cursive; }
     .cinzel-light { font-family: 'Cinzel Decorative', cursive; font-weight: 400; }
     .text-gold { color: var(--gold); }
 
-    /* Gold frame – static & elegant */
+    /* Ultra-soft glowing subtitle */
+    .tender-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.2rem;
+      line-height: 1.1;
+      color: #c19a3a;
+      text-shadow: 0 2px 15px rgba(212, 154, 58, 0.3);
+      letter-spacing: 1px;
+    }
+    @media (min-width: 768px) {
+      .tender-subtitle { font-size: 4.5rem; }
+    }
+
     .gold-frame {
       background: linear-gradient(45deg, #b8860b, #d4af37, #b8860b);
       padding: 5px;
@@ -45,7 +57,6 @@
       box-shadow: inset 0 0 40px rgba(212, 175, 55, 0.1);
     }
 
-    /* Divider */
     .divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
@@ -63,7 +74,6 @@
       text-shadow: 0 4px 8px rgba(184, 134, 11, 0.3);
     }
 
-    /* Floating golden lotus (replaces paper-plane) */
     #floating-lotus {
       position: absolute;
       width: 50px;
@@ -74,7 +84,6 @@
       opacity: 0.95;
     }
 
-    /* Timeline line */
     .timeline::before {
       content: '';
       position: absolute;
@@ -93,7 +102,6 @@
 </head>
 <body class="min-h-screen">
 
-  <!-- Subtle background ornament -->
   <div class="fixed inset-0 opacity-10 pointer-events-none">
     <img src="https://svgur.com/i/11e5.svg" class="w-full h-full object-cover" alt="">
   </div>
@@ -103,7 +111,6 @@
     <!-- Floating Golden Lotus -->
     <img id="floating-lotus" src="https://svgur.com/i/17nX.svg" alt="Golden Lotus">
 
-    <!-- Gold Frame Card -->
     <div class="gold-frame my-12">
       <div class="inner-card p-10 md:p-16">
 
@@ -112,7 +119,7 @@
           <h1 class="cinzel-light text-5xl md:text-7xl text-gold mb-6 tracking-wide leading-snug">
             Kuttan & Shantha
           </h1>
-          <p class="great-vibes text-5xl md:text-7xl text-gold mb-8">
+          <p class="tender-subtitle text-center mb-10">
             60 Years of Love ❤️ & Shantha’s 80th Birthday
           </p>
           <div class="divider"></div>
@@ -139,20 +146,31 @@
           </div>
         </section>
 
-        <!-- Photos – no gold border -->
+        <!-- Photos -->
         <div class="grid md:grid-cols-2 gap-10 mb-16">
           <img src="photos/photo1.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl transition-transform hover:scale-[1.03]" onerror="this.style.display='none'">
           <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl transition-transform hover:scale-[1.03]" onerror="this.style.display='none'">
         </div>
 
-        <!-- Date & Venue with SVG icons -->
+        <!-- Date & Venue with INLINE SVG icons (never break!) -->
         <div class="text-center mb-16">
-          <div class="flex items-center justify-center gap-4 mb-6">
-            <img src="https://svgur.com/i/17nR.svg" alt="Calendar" class="w-10 h-10">
-            <p class="text-5xl md:text-6xl great-vibes text-gold">23 December 2025</p>
+          <div class="flex items-center justify-center gap-5 mb-8">
+            <!-- Calendar Icon -->
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <p class="text-4xl md:text-5xl great-vibes text-gold">23 December 2025</p>
           </div>
-          <div class="flex items-center justify-center gap-4">
-            <img src="https://svgur.com/i/17nS.svg" alt="Location" class="w-10 h-10">
+
+          <div class="flex items-center justify-center gap-5">
+            <!-- Location Pin Icon -->
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
             <p class="text-2xl playfair">
               <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener"
                  class="border-b border-gold/50 hover:border-gold transition pb-1">
@@ -163,7 +181,7 @@
           <div class="divider mt-12"></div>
         </div>
 
-        <!-- Event Timeline -->
+        <!-- Timeline -->
         <section class="mb-20">
           <h2 class="text-center text-4xl playfair text-gold mb-12">Event Timeline</h2>
           <div class="relative timeline">
@@ -226,7 +244,7 @@
         <!-- Footer -->
         <footer class="text-center mt-24">
           <div class="divider"></div>
-          <p class="great-vibes text-5xl md:text-6xl text-gold mb-6 leading-snug">
+          <p class="dancing text-5xl md:text-6xl text-gold mb-6 leading-snug" style="text-shadow: 0 2px 15px rgba(212,154,58,0.3);">
             With love and gratitude
           </p>
           <p class="text-2xl playfair">Lizzlynn family</p>
@@ -236,40 +254,37 @@
     </div>
   </div>
 
-  <!-- Floating Lotus Animation -->
+  <!-- Floating Lotus + Scroll Animations -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const lotus = document.getElementById('floating-lotus');
       const timeline = document.querySelector('.timeline');
-      if (!lotus || !timeline) return;
+      if (lotus && timeline) {
+        const updateLotus = () => {
+          const rect = timeline.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          const scrollTop = window.scrollY;
+          const timelineTop = rect.top + scrollTop;
+          const timelineHeight = rect.height;
 
-      const updateLotus = () => {
-        const rect = timeline.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const scrollTop = window.scrollY;
-        const timelineTop = rect.top + scrollTop;
-        const timelineHeight = rect.height;
+          let progress = (scrollTop + windowHeight * 0.6 - timelineTop) / timelineHeight;
+          progress = Math.max(0, Math.min(1, progress));
 
-        let progress = (scrollTop + windowHeight * 0.6 - timelineTop) / timelineHeight;
-        progress = Math.max(0, Math.min(1, progress));
+          const centerX = rect.left + rect.width / 2;
+          const wobble = Math.sin(progress * Math.PI * 4) * 20;
+          const y = rect.top + progress * timelineHeight - 30;
 
-        const centerX = rect.left + rect.width / 2;
-        const wobble = Math.sin(progress * Math.PI * 4) * 20;
-        const y = rect.top + progress * timelineHeight - 30;
+          lotus.style.left = (centerX + wobble) + 'px';
+          lotus.style.top = y + 'px';
+          lotus.style.transform = `rotate(${progress * 360}deg)`;
+          lotus.style.opacity = 0.95 - progress * 0.4;
+        };
+        window.addEventListener('scroll', () => requestAnimationFrame(updateLotus));
+        window.addEventListener('resize', updateLotus);
+        updateLotus();
+      }
 
-        lotus.style.left = (centerX + wobble) + 'px';
-        lotus.style.top = y + 'px';
-        lotus.style.transform = `rotate(${progress * 360}deg)`;
-        lotus.style.opacity = 0.95 - progress * 0.4;
-      };
-
-      window.addEventListener('scroll', () => {
-        requestAnimationFrame(updateLotus);
-      });
-      window.addEventListener('resize', updateLotus);
-      updateLotus();
-
-      // Fade-in on scroll
+      // Fade-in
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
