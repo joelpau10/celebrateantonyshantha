@@ -3,210 +3,212 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Antony & Shantha — 60th Anniversary & 80th Birthday</title>
+  <title>Kuttan & Shantha — 60th Anniversary & 80th Birthday</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Great+Vibes&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind from CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* Palette & basics */
-    :root{
-      --gold:#b78b1e;
-      --gold-soft: rgba(183,139,30,0.12);
-      --paper:#fdfbf7;
+    :root {
+      --gold: #b88a1d;
+      --gold-strong: #b27210;
+      --paper-deep: #f3e6cf;
     }
+    *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
       color:#2b2b2b;
-      background: var(--paper);
+      background-color: var(--paper-deep);
       background-image:
-        radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 15%, rgba(0,0,0,0.04) 100%),
         url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      background-size:6px 6px,400px 400px;
+      background-size: cover, 450px 450px;
+      background-blend-mode: overlay;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
     }
 
-    /* Card container */
+    main { padding-top: 56px; padding-bottom: 64px; }
+
     .card {
-      background: rgba(255,255,255,0.94);
-      border: 1.5px solid rgba(183,139,30,0.25);
-      border-radius:1.25rem;
-      padding:2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06), inset 0 0 30px rgba(183,139,30,0.04);
-      position:relative;
-      overflow:visible;
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,253,246,0.96) 0%, rgba(255,255,252,0.95) 100%);
+      border-radius: 18px;
+      padding: 34px;
+      border: 2.25px solid var(--gold);
+      box-shadow: 0 20px 50px rgba(18,18,18,0.08), inset 0 0 40px rgba(184,134,11,0.03);
+      position: relative;
+      overflow: visible;
     }
 
-    /* Headers / fonts */
-    .names {
-      font-family: "Great Vibes", serif;
-      color: var(--gold);
-      font-size: 3.0rem;
-      line-height:1;
-      letter-spacing: -0.5px;
+    .corner {
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/d/da/Ornamental_corner_flourish_gold.svg') no-repeat center/contain;
+      opacity: 0.18;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.05));
+      animation: cornerShimmer 6.5s ease-in-out infinite;
+      pointer-events: none;
     }
-    .subtitle {
+    .corner.top-left { top: -36px; left: -36px; transform: rotate(0deg) }
+    .corner.top-right { top: -36px; right: -36px; transform: rotate(90deg) }
+    .corner.bottom-left { bottom: -36px; left: -36px; transform: rotate(270deg) }
+    .corner.bottom-right { bottom: -36px; right: -36px; transform: rotate(180deg) }
+
+    @keyframes cornerShimmer {
+      0%,100% { opacity: 0.16; filter: brightness(1) }
+      50% { opacity: 0.42; filter: brightness(1.25) }
+    }
+
+    .title {
+      font-family: "Playfair Display", serif;
+      color: var(--gold);
+      font-weight:700;
+      font-size: 4rem;
+      line-height: .98;
+      letter-spacing: -1px;
+      margin: 0;
+    }
+    .sub {
       font-family: "Cormorant Garamond", serif;
       font-style: italic;
-      color: #4b4b4b;
-      margin-top:.4rem;
+      font-size: 1.04rem;
+      color:#555;
+      margin-top: 6px;
     }
     .meta {
       color:#666;
-      font-size:.95rem;
-      margin-top:.45rem;
-      letter-spacing:.4px;
+      margin-top:8px;
+      font-size:.96rem;
     }
-
-    /* Divider ornament */
-    .divider {
-      display:inline-block;
-      width:78px;
+    .decor-divider {
+      width:84px;
       height:20px;
       background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg');
-      opacity:.95;
-      margin-top:.8rem;
+      margin: 14px auto 0;
+      opacity: .95;
     }
 
-    /* Photo portrait style (inverted rectangle) */
-    .photo-portrait {
-      width:100%;
-      aspect-ratio: 3/4; /* taller than wide (portrait) */
-      object-fit: cover;
-      border-radius: .75rem;
-      display:block;
-      margin: 0 auto;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    /* Fade effect setup */
+    .fade-item {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    .fade-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Secondary photo above Lifetime of Love */
-    .photo-secondary {
-      width:220px;
-      height:220px;
-      object-fit:cover;
-      border-radius: .5rem;
-      display:block;
-      margin: 0 auto 1rem auto;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-
-    /* Vintage frame around message */
-    .vintage-frame{
-      position:relative;
-      padding:2rem;
-      border-radius: .75rem;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid rgba(183,139,30,0.14);
-      box-shadow: inset 0 0 40px rgba(183,139,30,0.03);
-      overflow:visible;
-    }
-
-    /* corner ornaments with shimmer */
-    .vintage-frame::before,
-    .vintage-frame::after{
-      content:"";
-      position:absolute;
-      width:72px;
-      height:72px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/d/da/Ornamental_corner_flourish_gold.svg') no-repeat center/contain;
-      opacity:0.18;
-      filter: drop-shadow(0 1px 0 rgba(0,0,0,0.03));
-      animation: shimmer 6s ease-in-out infinite;
-      pointer-events:none;
-    }
-    .vintage-frame::before{ top:-20px; left:-20px; transform:rotate(0deg) }
-    .vintage-frame::after{ bottom:-20px; right:-20px; transform:rotate(180deg) }
-
-    @keyframes shimmer {
-      0%,100% { opacity:0.16; filter:brightness(1) }
-      50% { opacity:0.36; filter:brightness(1.18) }
-    }
-
-    /* Timeline layout */
-    .timeline-wrap{
-      position:relative;
-      margin-top:2.25rem;
-      margin-bottom:2.25rem;
-      padding-left:1rem;
-      padding-right:1rem;
-    }
-    .timeline {
+    /* Equal photo design */
+    .photo-wrapper {
       position: relative;
-      width:100%;
-      max-width:720px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
+      width: 100%;
+      max-width: 360px;
+    }
+    .photo-same {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+      border: 1.5px solid rgba(184,134,11,0.28);
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+    .photo-same:hover {
+      transform: scale(1.03);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
     }
 
-    /* dotted center line */
+    .vintage-frame {
+      margin-top: 8px;
+      padding: 22px;
+      border-radius: 12px;
+      background: rgba(255,255,250,0.98);
+      border: 1px solid rgba(184,134,11,0.12);
+      box-shadow: inset 0 0 40px rgba(184,134,11,0.02);
+      position: relative;
+    }
+    .vintage-frame h2 { font-family:"Playfair Display",serif; color:var(--gold); font-size:1.6rem; margin:0; }
+
+    /* timeline */
+    .timeline-wrap { margin-top: 28px; margin-bottom:28px; position:relative; }
+    .timeline { max-width:720px; margin: 0 auto; padding: 26px 10px; position: relative; }
     .timeline-line {
       position:absolute;
       left:50%;
-      top:0;
       transform:translateX(-50%);
+      top:0;
       width:2px;
       height:100%;
       background-image: radial-gradient(var(--gold) 1px, transparent 1px);
       background-size: 2px 12px;
-      opacity:0.18;
+      opacity: 0.18;
     }
-
-    /* timeline item */
-    .tl-item {
-      position:relative;
-      width:50%;
-      padding:1rem 2rem;
-      box-sizing:border-box;
-    }
-    .tl-left { left:0; text-align:right; margin-left:0; margin-right:auto }
-    .tl-right { left:50%; text-align:left }
-    .tl-time { font-weight:600; color:#2f2f2f; font-size:0.98rem }
-    .tl-desc { color:#585858; font-size:.96rem; margin-top:.25rem }
-
-    /* timeline marker (station) */
+    .tl-item { width:50%; padding: 12px 18px; box-sizing:border-box; position:relative; }
+    .tl-left { left:0; text-align:right; float:left; clear:both; }
+    .tl-right { left:50%; text-align:left; float:right; clear:both; }
+    .tl-time { font-weight:700; color:#222; font-size:1rem }
+    .tl-desc { color:#555; margin-top:6px }
     .tl-marker {
       position:absolute;
       left:50%;
       transform:translateX(-50%);
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background: var(--paper);
+      width:18px; height:18px; border-radius:50%;
+      background: var(--paper-deep);
       border: 2px solid var(--gold);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
       z-index:5;
     }
 
-    /* Blossom (SVG) controlled by JS - placed on the center line */
     .blossom {
       position:absolute;
       left:50%;
-      transform:translate(-50%, -12px);
-      width:36px;
-      height:36px;
+      transform:translate(-50%,-12px);
+      width:40px;
+      height:40px;
       z-index:8;
       pointer-events:none;
-      transition: transform 0.12s linear;
-      filter: drop-shadow(0 6px 12px rgba(183,139,30,0.12));
+      transition: transform .08s linear;
+      filter: drop-shadow(0 8px 18px rgba(184,134,11,0.12));
+      opacity:0.95;
     }
 
-    /* Dress code */
-    .dresscode { color:#4a4a4a; font-size:.95rem; margin-top:.8rem; }
+    .section-heading {
+      font-family:"Playfair Display", serif;
+      color: var(--gold-strong);
+      text-align:center;
+      font-size: 1.6rem;
+      margin: 26px 0 10px 0;
+      letter-spacing: -0.6px;
+    }
+    .section-subdivider {
+      width: 72px;
+      height: 16px;
+      margin: 10px auto 0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg') no-repeat center/contain;
+      opacity:0.95;
+    }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px){
-      .names { font-size: 2.2rem }
-      .timeline { padding: 1.2rem 0 }
-      .tl-item { width:100%; left:0; text-align:left; padding-left:3.5rem; padding-right:1rem }
-      .tl-left, .tl-right { left:0 }
+    .dresscode {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius:10px;
+      background: rgba(255,255,250,0.98);
+      border:1px solid rgba(184,134,11,0.08);
+    }
+
+    @media (max-width: 820px){
+      .title { font-size: 2.6rem }
+      .tl-item{ width:100%; float:none; padding-left:56px }
       .timeline-line { left:36px }
       .tl-marker { left:36px; transform:translateX(-50%) }
       .blossom { left:36px }
@@ -215,183 +217,172 @@
 </head>
 <body>
 
-  <main class="min-h-[160vh] flex items-start justify-center py-12 px-6">
-    <div class="max-w-3xl w-full card">
+  <main>
+    <div class="card">
 
-      <!-- Header -->
-      <header class="text-center mb-6">
-        <div class="names">Antony &amp; Shantha</div>
-        <div class="subtitle">
-          Celebrating 60 years of love ❤️ and Shantha’s 80th Birthday 🎂
+      <div class="corner top-left"></div>
+      <div class="corner top-right"></div>
+      <div class="corner bottom-left"></div>
+      <div class="corner bottom-right"></div>
+
+      <header class="text-center fade-item">
+        <h1 class="title">Kuttan &amp; Shantha</h1>
+        <div class="sub">Celebrating 60 years of love ❤️ and Shantha’s 80th Birthday 🎂</div>
+        <div class="meta">
+          23<sup>rd</sup> December 2025 • 
+          <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" class="underline text-gray-700">7th Floor, Regent Hall, The Avenue Regent, Kochi</a>
         </div>
-        <div class="meta">23<sup>rd</sup> December 2025 • <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener" class="underline text-gray-700">7th Floor, Regent Hall, The Avenue Regent, Kochi</a></div>
-        <div class="divider mx-auto"></div>
+        <div class="decor-divider"></div>
       </header>
 
-      <!-- Top portrait photo -->
-      <div class="mb-6">
-        <!-- portrait/inverted rectangle - ensure photo1.jpg is tall (use a vertical crop) -->
-        <img src="photos/photo1.jpg" alt="Antony and Shantha" class="photo-portrait" onerror="this.style.display='none'">
+      <!-- Equal-size Photos -->
+      <div class="mt-6 flex flex-col items-center space-y-8">
+        <div class="photo-wrapper fade-item">
+          <img src="photos/photo1.jpg" alt="Kuttan & Shantha" class="photo-same">
+        </div>
+        <div class="decor-divider"></div>
+        <div class="photo-wrapper fade-item">
+          <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="photo-same">
+        </div>
       </div>
 
-      <!-- Secondary photo above the "Lifetime of Love" -->
-      <div class="text-center mb-4">
-        <img src="photos/photo2.jpg" alt="Couple full body" class="photo-secondary" onerror="this.style.display='none'">
-      </div>
-
-      <!-- Message framed -->
-      <section class="vintage-frame mb-6">
-        <h2 class="text-2xl font-semibold" style="color:var(--gold); font-family:'Cormorant Garamond', serif;">A Lifetime of Love</h2>
-        <div class="divider mx-auto my-4"></div>
-        <p style="color:#4f4f4f; line-height:1.6; max-width:48rem; margin:0 auto;">
-          Join us to honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> — celebrating six decades of devoted companionship and the 80th birthday of our beloved Shantha. Their lives together have been stitched with kindness, quiet laughter, and an enduring tenderness that continues to guide us.
+      <section class="vintage-frame mt-8 fade-item">
+        <h2>A Lifetime of Love</h2>
+        <div class="decor-divider" style="margin-bottom:12px;"></div>
+        <p style="color:#444; line-height:1.65;">
+          Join us to honor <strong>Kuttan</strong> and <strong>Shantha</strong> — celebrating six decades of devoted companionship and the 80th birthday of our beloved Shantha. Their lives together have been stitched with kindness, quiet laughter, and an enduring tenderness that continues to guide us.
         </p>
       </section>
 
-      <!-- Timeline with blossom -->
-      <div class="timeline-wrap">
-        <div class="timeline">
+      <div class="fade-item">
+        <div class="section-heading">Event Timeline</div>
+        <div class="section-subdivider"></div>
 
-          <!-- center dotted line -->
-          <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-wrap">
+          <div class="timeline" id="timeline">
+            <div class="timeline-line"></div>
 
-          <!-- blossom SVG - positioned absolutely, JS will move it down the timeline -->
-          <svg class="blossom" id="blossom" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- subtle gold stylized blossom -->
-            <defs>
-              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#f6e7b8"/>
-                <stop offset="1" stop-color="#cfa64a"/>
-              </linearGradient>
-            </defs>
-            <g transform="translate(32,32)">
-              <circle r="6" fill="url(#g)" opacity="0.98" />
-              <path d="M0 -12 C6 -8 12 -8 12 0 C12 8 6 12 0 12 C-6 12 -12 8 -12 0 C-12 -8 -6 -8 0 -12 Z" fill="#f3d98b" opacity="0.95"/>
-              <circle r="2.2" fill="#b78b1e"/>
-            </g>
-          </svg>
+            <svg class="blossom" id="blossom" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="grad1" x1="0" x2="1">
+                  <stop offset="0" stop-color="#f6e7b8"/>
+                  <stop offset="1" stop-color="#cfa64a"/>
+                </linearGradient>
+              </defs>
+              <g transform="translate(32,32)">
+                <circle r="6" fill="url(#grad1)" />
+                <path d="M0 -12 C6 -8 12 -8 12 0 C12 8 6 12 0 12 C-6 12 -12 8 -12 0 C-12 -8 -6 -8 0 -12 Z" fill="#f3d98b"/>
+                <circle r="2.2" fill="#b78b1e"/>
+              </g>
+            </svg>
 
-          <!-- Each timeline item -->
-          <div class="tl-item tl-left" style="top:0; position:relative;">
-            <div class="tl-time">12:30 PM</div>
-            <div class="tl-desc">Gathering</div>
-          </div>
+            <div style="height:18px;"></div>
+            <div class="tl-item tl-left">
+              <div class="tl-time">12:30 PM</div>
+              <div class="tl-desc">Gathering</div>
+            </div>
+            <div class="tl-marker" style="top:62px;"></div>
 
-          <!-- marker placed roughly near first item -->
-          <div class="tl-marker" style="top:36px;"></div>
+            <div style="height:40px;"></div>
+            <div class="tl-item tl-right">
+              <div class="tl-time">1:00 PM</div>
+              <div class="tl-desc">Commencement</div>
+            </div>
+            <div class="tl-marker" style="top:200px;"></div>
 
-          <div style="height:40px;"></div>
+            <div style="height:40px;"></div>
+            <div class="tl-item tl-left">
+              <div class="tl-time">1:30 PM</div>
+              <div class="tl-desc">Lunch</div>
+            </div>
+            <div class="tl-marker" style="top:350px;"></div>
 
-          <div class="tl-item tl-right" style="position:relative;">
-            <div class="tl-time">1:00 PM</div>
-            <div class="tl-desc">Commencement</div>
-          </div>
+            <div style="height:40px;"></div>
+            <div class="tl-item tl-right">
+              <div class="tl-time">3:30 PM</div>
+              <div class="tl-desc">Closing</div>
+            </div>
+            <div class="tl-marker" style="top:490px;"></div>
 
-          <div class="tl-marker" style="top:170px;"></div>
-
-          <div style="height:40px;"></div>
-
-          <div class="tl-item tl-left" style="position:relative;">
-            <div class="tl-time">1:30 PM</div>
-            <div class="tl-desc">Lunch</div>
-          </div>
-
-          <div class="tl-marker" style="top:320px;"></div>
-
-          <div style="height:40px;"></div>
-
-          <div class="tl-item tl-right" style="position:relative;">
-            <div class="tl-time">3:30 PM</div>
-            <div class="tl-desc">Closing</div>
-          </div>
-
-          <div class="tl-marker" style="top:470px;"></div>
-
-          <!-- spacer to extend timeline length -->
-          <div style="height:120px;"></div>
-        </div>
-      </div>
-
-      <!-- Dress code -->
-      <div class="dresscode vintage-frame">
-        <p style="margin:0 0 .5rem 0; font-style:italic;">
-          Whether in silk or shimmer, velvets or lace — let’s meet in timeless grace.
-        </p>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <div style="min-width:200px">
-            <div style="font-weight:600;color:#333">Men</div>
-            <div>Beige shirt / kurta and pants</div>
-          </div>
-          <div style="min-width:200px">
-            <div style="font-weight:600;color:#333">Women</div>
-            <div>Gold or beige lehenga / salwar / saree (silk, shimmer, velvet, or lace welcome)</div>
+            <div style="height:140px;"></div>
           </div>
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="text-center mt-6" style="color:#6b6b6b;font-size:.95rem;">
-        <div class="divider mx-auto mb-3"></div>
-        <div>With love and gratitude — The Family of Antony &amp; Shantha</div>
+      <div class="fade-item">
+        <div class="section-heading">Dress Code</div>
+        <div class="section-subdivider"></div>
+
+        <div class="dresscode mt-4">
+          <p style="margin:0 0 .6rem 0; font-style:italic;">
+            Whether in silk or shimmer, velvets or lace — let’s meet in timeless grace.
+          </p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <div style="min-width:220px">
+              <div style="font-weight:700;color:#333">Men</div>
+              <div>Beige shirt / kurta and pants</div>
+            </div>
+            <div style="min-width:220px">
+              <div style="font-weight:700;color:#333">Women</div>
+              <div>Gold or beige lehenga / salwar / saree (silk, shimmer, velvet, or lace welcome)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="text-center mt-6 fade-item" style="color:#6b6b6b;font-size:.95rem;">
+        <div class="decor-divider mx-auto mb-3"></div>
+        <div>With love and gratitude — The Family of Kuttan &amp; Shantha</div>
       </footer>
 
     </div>
   </main>
 
-  <!-- JavaScript: move the blossom along the timeline as the user scrolls -->
   <script>
+    // Blossom scroll animation
     (function(){
       const blossom = document.getElementById('blossom');
-      const timeline = document.querySelector('.timeline');
-      if(!blossom || !timeline) return;
+      const timeline = document.getElementById('timeline');
+      if (!blossom || !timeline) return;
 
-      // compute usable zone: from timeline top to timeline bottom
-      function updateBlossom(){
+      function update() {
         const rect = timeline.getBoundingClientRect();
         const viewH = window.innerHeight || document.documentElement.clientHeight;
-        // define start (when center of viewport reaches top of timeline)
-        const start = rect.top - viewH * 0.2;
-        const end = rect.bottom - viewH * 0.2;
-        const total = end - start;
-        const sc = window.scrollY || window.pageYOffset;
-
-        // compute progress using viewport-relative measurement
-        const viewportCenter = sc + (viewH * 0.45);
-        let progress = (viewportCenter - (window.scrollY + rect.top)) / (rect.height);
-        // alternative safe progress using page offsets:
-        const pageTop = rect.top + window.scrollY;
-        progress = (viewportCenter - pageTop) / rect.height;
-        // clamp:
+        const pageTop = window.scrollY || window.pageYOffset;
+        const viewportCenter = pageTop + viewH * 0.45;
+        const timelineTopPage = rect.top + pageTop;
+        const timelineHeight = rect.height || 1;
+        let progress = (viewportCenter - timelineTopPage) / timelineHeight;
         progress = Math.max(0, Math.min(1, progress));
-
-        // compute y within timeline container
-        const y = rect.top + progress * rect.height;
-        // convert to local position relative to timeline top
-        const localY = progress * rect.height;
-
-        // place blossom (centered on the dotted line)
-        const left = (rect.left + rect.width/2);
-        blossom.style.transform = `translate(-50%, ${localY - 12}px) rotate(${progress * 360}deg)`;
-        // adjust opacity slightly
-        blossom.style.opacity = (0.85 - progress * 0.45);
+        const y = progress * rect.height;
+        blossom.style.transform = `translate(-50%, ${y - 18}px) rotate(${progress * 360}deg)`;
+        blossom.style.opacity = (0.95 - progress * 0.5);
       }
 
-      // throttle scroll for performance
       let ticking = false;
-      window.addEventListener('scroll', function(){
-        if(!ticking){
-          window.requestAnimationFrame(function(){
-            updateBlossom();
-            ticking = false;
-          });
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => { update(); ticking = false; });
         }
         ticking = true;
       }, {passive:true});
-
-      // initial call
-      window.addEventListener('load', updateBlossom);
-      window.addEventListener('resize', updateBlossom);
+      window.addEventListener('load', update);
+      window.addEventListener('resize', update);
     })();
+
+    // Fade-in on scroll
+    const fadeItems = document.querySelectorAll('.fade-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    fadeItems.forEach(item => observer.observe(item));
   </script>
+
 </body>
 </html>
