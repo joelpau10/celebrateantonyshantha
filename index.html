@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuttan & Shantha — 60th Anniversary & 80th Birthday</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Noto+Serif+Malayalam:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -56,7 +56,6 @@
       box-shadow: inset 0 0 30px rgba(232, 213, 163, 0.15);
     }
 
-    /* PURE GOLDEN LINE — NO TEXT */
     .divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
@@ -66,16 +65,18 @@
     .message-card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
-      padding: 2.2rem 1.8rem;
+      padding: 2.8rem 2.2rem;
       border-radius: 1.75rem;
       border: 1px solid rgba(232, 213, 163, 0.3);
       box-shadow: 0 10px 30px rgba(184, 159, 110, 0.15);
       text-align: center;
       line-height: 1.9;
-      font-size: 1.28rem !important;
+      font-size: 1.
+
+: 1.38rem !important;
     }
     @media (min-width: 768px) {
-      .message-card { text-align: left; padding: 2.8rem; font-size: 1.38rem !important; }
+      .message-card { text-align: left; font-size: 1.45rem !important; }
     }
 
     .date-venue-text {
@@ -88,69 +89,15 @@
       .date-venue-text { font-size: 2rem !important; }
     }
 
-    /* TIMELINE — FULLY RESTORED & ANIMATED */
-    .timeline-title {
-      margin-top: -2rem;
-      padding-top: 4rem;
-      text-align: center;
-    }
-    .vine-container {
-      position: relative;
-      padding: 10rem 0 20rem;
-      overflow: hidden;
-    }
-    #vine-path {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    #vine-path path {
-      stroke: var(--gold-dark);
-      stroke-width: 2.8;
-      fill: none;
-      stroke-dasharray: 12 16;
-      opacity: 0.8;
-    }
-    .vine-bullet {
-      position: absolute;
-      width: 18px; height: 18px;
-      background: var(--gold-light);
-      border: 4px solid var(--gold-bright);
-      border-radius: 50%;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
-      z-index: 9;
-    }
-    .timeline-item {
-      position: absolute;
-      z-index: 10;
-      font-weight: 600;
-      color: var(--gold-dark);
-      text-shadow: 0 2px 8px rgba(184,159,110,0.3);
-      font-size: 1.15rem;
-      line-height: 1.5;
-      width: 65%;
-      left: 28% !important;
-      transform: translateY(-50%);
-    }
-    @media (min-width: 768px) {
-      .timeline-item {
-        font-size: 1.25rem;
-        width: 55%;
-        left: 35% !important;
-      }
-    }
+    .timeline-title { text-align: center; margin: 4rem 0 2rem; }
+    .vine-container { position: relative; padding: 10rem 0 20rem; overflow: hidden; }
+    #vine-path { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    #vine-path path { stroke: var(--gold-dark); stroke-width: 2.8; fill: none; stroke-dasharray: 12 16; opacity: 0.8; }
+    .vine-bullet { position: absolute; width: 18px; height: 18px; background: var(--gold-light); border: 4px solid var(--gold-bright); border-radius: 50%; box-shadow: 0 0 30px rgba(212, 175, 55, 0.9); z-index: 9; }
+    .timeline-item { position: absolute; z-index: 10; font-weight: 600; color: var(--gold-dark); text-shadow: 0 2px 8px rgba(184,159,110,0.3); font-size: 1.15rem; line-height: 1.5; width: 65%; left: 28% !important; transform: translateY(-50%); }
+    @media (min-width: 768px) { .timeline-item { font-size: 1.25rem; width: 55%; left: 35% !important; } }
 
-    #paper-plane {
-      position: fixed !important;
-      width: 80px; height: 80px;
-      pointer-events: none;
-      z-index: 9999;
-      filter: drop-shadow(0 12px 35px rgba(184,134,11,0.7));
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      transform-origin: center;
-    }
+    #paper-plane { position: fixed !important; width: 80px; height: 80px; pointer-events: none; z-index: 9999; filter: drop-shadow(0 12px 35px rgba(184,134,11,0.7)); opacity: 0; transition: opacity 0.6s ease; transform-origin: center; }
   </style>
 </head>
 <body class="min-h-screen">
@@ -170,37 +117,26 @@
             Kuttan & Shantha
           </h1>
           
-          <!-- 100% CORRECT TITLE -->
           <p class="subtitle-60years mb-10">
             60 Years of Love & Shantha’s 80th Birthday
           </p>
           
           <div class="divider"></div>
-          <p class="text-xl md:text-2xl playfair font-medium" style="color:#b89f6e;">Dear Family & Friends</p>
+          <p class="text-xl md:text-2xl playfair font-medium" style to you:#b89f6e;">Dear Family & Friends</p>
         </header>
 
-        <section class="grid md:grid-cols-2 gap-8 mb-16">
-          <div class="message-card">
-            Six decades of togetherness, countless shared sunsets, and now — Shantha’s 80th bloom. 
+        <!-- ONLY ENGLISH — CLEAN & ELEGANT -->
+        <section class="mb-16">
+          <div class="message-card mx-auto max-w-3xl">
+            Six decades of togetherness, countless shared sunsets, and now — Shantha’s 80th bloom.<br><br>
             This December, we gather to wrap our beloved Kuttan & Shantha in golden love.<br><br>
             Your presence will make this milestone shimmer brighter than ever.
-          </div>
-          <div class="message-card malayalam text-center md:text-right" dir="rtl" lang="ml">
-            പ്രിയ കുടുംബാംഗങ്ങളേ, സ്നേഹിതരേ,<br>
-            അറുപതു വർഷത്തെ പ്രണയവും ഒത്തൊഴിയാത്ത സ്നേഹവും<br>
-            കുട്ടനേട്ടനും ഷാന്താമ്മയും കാത്തുസൂക്ഷിച്ചു.<br>
-            ഇന്ന് ഷാന്താമ്മയുടെ 80-ാം പിറന്നാൾ,<br>
-            ഈ ഡിസംബർ 23-ന് നാം ഒരുമിച്ച് ആഘോഷിക്കുന്നു.<br>
-            നിങ്ങളുടെ സ്നേഹസാന്നിധ്യം ഈ നിമിഷങ്ങളെ<br>
-            സ്വർണ്ണതിളക്കമുള്ളതാക്കും.<br>
-            സ്നേഹപൂർവ്വം,<br>
-            ലിസ്ലിൻ കുടുംബം
           </div>
         </section>
 
         <div class="grid md:grid-cols-2 gap-8 mb-16">
-          <img src="photos/photo1.jpg?t=202512310012" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
-          <img src="photos/photo2.jpg?t=202512310012" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo1.jpg?t=202512310013" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo2.jpg?t=202512310013" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
         </div>
 
         <div class="text-center mb-16">
@@ -228,7 +164,6 @@
           <div class="divider mt-12"></div>
         </div>
 
-        <!-- EVENT TIMELINE — FULLY RESTORED -->
         <div class="timeline-title">
           <h2 class="text-5xl playfair text-gold-bright">Event Timeline</h2>
         </div>
@@ -237,23 +172,20 @@
           <svg id="vine-path" viewBox="0 0 800 1200" preserveAspectRatio="none">
             <path d="M100,100 Q50,300 120,500 Q180,700 100,900 Q50,1100 100,1180" />
           </svg>
-
           <div class="vine-bullet" style="top: 12%; left: 12%;"></div>
           <div class="timeline-item" style="top: 12%;">12:30 PM — Gathering & Welcome</div>
-
           <div class="vine-bullet" style="top: 32%; left: 8%;"></div>
           <div class="timeline-item" style="top: 32%;">1:00 PM — Ceremony & Tributes</div>
-
           <div class="vine-bullet" style="top: 52%; left: 14%;"></div>
           <div class="timeline-item" style="top: 52%;">1:30 PM — Lunch & Celebration</div>
-
           <div class="vine-bullet" style="top: 72%; left: 10%;"></div>
           <div class="timeline-item" style="top: 72%;">3:30 PM — Closing & Group Photos</div>
         </section>
 
+        <!-- DRESS CODE: SMART CASUALS ONLY -->
         <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg text-center">
           <h2 class="text-4xl playfair text-gold-bright mb-8">Dress Code</h2>
-          <p class="text-xl text-gold-dark">Smart casuals / Kerala ethnic wear</p>
+          <p class="text-xl text-gold-dark font-medium">Smart Casuals</p>
         </section>
 
         <footer class="text-center mt-24">
@@ -266,7 +198,6 @@
     </div>
   </div>
 
-  <!-- FULLY WORKING ANIMATIONS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const plane = document.getElementById('paper-plane');
@@ -302,7 +233,6 @@
       window.addEventListener('resize', updatePlane);
       requestAnimationFrame(updatePlane);
 
-      // Scroll reveal animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
