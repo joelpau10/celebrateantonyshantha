@@ -19,7 +19,9 @@
       --text-black: #2d1b0a;
     }
     body {
-      background: linear-gradient(to bottom, #fef9f1, #f5e6d3);
+      background: linear-gradient(to bottom, #fef9f
+
+f1, #f5e6d3);
       background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
       background-attachment: fixed;
       background-size: 460px;
@@ -29,14 +31,6 @@
     }
     .playfair { font-family: 'Playfair Display', serif; }
     .cinzel-light { font-family: 'Cinzel Decorative', cursive; font-weight: 400; }
-    .malayalam {
-      font-family: 'Noto Serif Malayalam', serif;
-      font-weight: 400;
-      line-height: 2.2;
-      font-size: 1.15rem;
-      color: #5d4a3a;
-      letter-spacing: 0.5px;
-    }
 
     .title-gold { color: var(--gold-bright); text-shadow: 0 4px 20px rgba(212, 175, 55, 0.4); }
 
@@ -76,13 +70,45 @@
       margin: 3rem 0;
     }
     .divider::before {
-      content: "❦";
+      content: "flourish";
       position: absolute;
       top: -18px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 32px;
       color: var(--gold);
+    }
+
+    .message-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 2rem 1.5rem;
+      border-radius: 1.75rem;
+      border: 1px solid rgba(232, 213, 163, 0.3);
+      box-shadow: 0 10px 30px rgba(184, 159, 110, 0.15);
+      text-align: center;
+      line-height: 2;
+      font-size: 1.25rem !important;
+    }
+    @media (min-width: 768px) {
+      .message-card { 
+        text-align: left; 
+        padding: 2.5rem; 
+        font-size: 1.35rem !important;
+      }
+    }
+
+    /* DATE & VENUE — SAME FONT SIZE, PERFECT BALANCE */
+    .date-venue-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem !important;
+      font-weight: 500;
+      color: #3d2b1f;
+    }
+    @media (min-width: 768px) {
+      .date-venue-text {
+        font-size: 2rem !important;
+      }
     }
 
     .vine-container { position: relative; padding: 10rem 0 20rem; overflow: hidden; }
@@ -112,9 +138,8 @@
             Kuttan & Shantha
           </h1>
           
-          <!-- EXACTLY YOUR WORDS + EMOJIS -->
           <p class="subtitle-60years mb-10">
-            60 years of love Heart and Shantha’s 80th birthday Cake
+            60 Years of Love Heart & Shantha’s 80th Birthday Cake
           </p>
           
           <div class="divider"></div>
@@ -147,10 +172,11 @@
         </section>
 
         <div class="grid md:grid-cols-2 gap-8 mb-16">
-          <img src="photos/photo1.jpg?t=202512310007" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
-          <img src="photos/photo2.jpg?t=202512310007" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo1.jpg?t=202512310009" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo2.jpg?t=202512310009" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
         </div>
 
+        <!-- DATE & VENUE — NOW PERFECTLY MATCHED -->
         <div class="text-center mb-16">
           <div class="flex items-center justify-center gap-5 mb-8">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8">
@@ -159,14 +185,14 @@
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            <p class="text-3xl md:text-4xl playfair">23 December 2025</p>
+            <p class="date-venue-text">23rd December 2025</p>
           </div>
           <div class="flex items-center justify-center gap-5">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <p class="text-2xl playfair">
+            <p class="date-venue-text">
               <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener"
                  class="border-b border-gold/40 hover:border-gold-bright transition pb-1">
                 7th Floor, Regent Hall, The Avenue Regent, Kochi
@@ -198,7 +224,6 @@
           <div class="timeline-item" style="top: 72%;">3:30 PM — Closing & Group Photos</div>
         </section>
 
-        <!-- DRESS CODE → Dress Code (proper case) -->
         <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg text-center">
           <h2 class="text-4xl playfair text-gold-bright mb-8">Dress Code</h2>
           <p class="text-xl text-gold-dark">
