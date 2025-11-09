@@ -71,7 +71,7 @@
       margin: 3rem 0;
     }
     .divider::before {
-      content: "❦";
+      content: "flowing heart";
       position: absolute;
       top: -18px;
       left: 50%;
@@ -80,10 +80,23 @@
       color: var(--gold);
     }
 
-    /* VINE TRAIL — REFINED & BULLET-ALIGNED */
+    .message-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      border-radius: 1.75rem;
+      border: 1px solid rgba(232, 213, 163, 0.3);
+      box-shadow: 0 10px 30px rgba(184, 159, 110, 0.15);
+      text-align: center;
+      line-height: 2;
+    }
+    @media (min-width: 768px) {
+      .message-card { text-align: left; }
+    }
+
     .vine-container {
       position: relative;
-      padding: 8rem 0 12rem;
+      padding: 10rem 0 14rem;
       overflow: hidden;
     }
     #vine-path {
@@ -115,11 +128,11 @@
       color: var(--gold-dark);
       text-shadow: 0 2px 8px rgba(184,159,110,0.3);
       width: 300px;
+      font-size: 1.1rem;
     }
 
     #paper-plane {
       position: fixed !important;
-      top: 0; left: 0;
       width: 72px; height: 72px;
       pointer-events: none;
       z-index: 9999;
@@ -138,11 +151,10 @@
 
   <div class="max-w-4xl mx-auto px-6 py-12 relative">
 
-    <!-- PAPER PLANE — NOW VISIBLE & FLYING -->
     <img id="paper-plane" src="photos/paperplane.png" alt="Paper Plane">
 
     <div class="gold-frame my-12">
-      <div class="inner-card p-10 md:p-16">
+      <div class="inner-card p-8 md:p-16">
 
         <header class="text-center mb-16">
           <h1 class="cinzel-light text-5xl md:text-7xl title-gold mb-8 tracking-wide leading-snug">
@@ -155,33 +167,35 @@
           <p class="text-xl md:text-2xl playfair font-medium text-gold-dark">Dear Family & Friends</p>
         </header>
 
-        <!-- MALAYALAM — SOFT, ELEGANT, HANDWRITTEN FEEL -->
-        <section class="grid md:grid-cols-2 gap-10 mb-16 text-lg leading-relaxed">
-          <div class="bg-white/80 p-8 rounded-2xl border border-gold/20 shadow-lg">
-            <p class="mb-6">
-              Six decades of togetherness, countless shared sunsets, and now — Shantha’s 80th bloom. 
-              This December, we gather to wrap our beloved Kuttan & Shantha in golden love.
-            </p>
-            <p>Your presence will make this milestone shimmer brighter than ever.</p>
+        <section class="grid md:grid-cols-2 gap-8 mb-16">
+          <div class="message-card">
+            Six decades of togetherness,<br>
+            countless shared sunsets, and now<br>
+            — Shantha’s 80th bloom. This<br>
+            December, we gather to wrap our<br>
+            beloved Kuttan & Shantha in<br>
+            golden love.<br><br>
+            Your presence will make this<br>
+            milestone shimmer brighter than<br>
+            ever.
           </div>
-          <div class="bg-white/80 p-8 rounded-2xl border border-gold/20 shadow-lg malayalam text-right" dir="rtl" lang="ml">
-            <p class="leading-loose">
-              പ്രിയ കുടുംബാംഗങ്ങളേ, സ്നേഹിതരേ,<br>
-              അറുപതു വർഷത്തെ പ്രണയവും ഒത്തൊഴിയാത്ത സ്നേഹവും<br>
-              കുട്ടനേട്ടനും ഷാന്താമ്മയും കാത്തുസൂക്ഷിച്ചു.<br>
-              ഇന്ന് ഷാന്താമ്മയുടെ 80-ാം പിറന്നാൾ,<br>
-              ഈ ഡിസംബർ 23-ന് നാം ഒരുമിച്ച് ആഘോഷിക്കുന്നു.<br>
-              നിങ്ങളുടെ സ്നേഹസാന്നിധ്യം ഈ നിമിഷങ്ങളെ<br>
-              സ്വർണ്ണതിളക്കമുള്ളതാക്കും.<br>
-              സ്നേഹപൂർവ്വം,<br>
-              ലിസ്ലിൻ കുടുംബം
-            </p>
+          <div class="message-card malayalam text-center md:text-right" dir="rtl" lang="ml">
+            പ്രിയ കുടുംബാംഗങ്ങളേ, സ്നേഹിതരേ,<br>
+            അറുപതു വർഷത്തെ പ്രണയവും ഒത്തൊഴിയാത്ത സ്നേഹവും<br>
+            കുട്ടനേട്ടനും ഷാന്താമ്മയും കാത്തുസൂക്ഷിച്ചു.<br>
+            ഇന്ന് ഷാന്താമ്മയുടെ 80-ാം പിറന്നാൾ,<br>
+            ഈ ഡിസംബർ 23-ന് നാം ഒരുമിച്ച് ആഘോഷിക്കുന്നു.<br>
+            നിങ്ങളുടെ സ്നേഹസാന്നിധ്യം ഈ നിമിഷങ്ങളെ<br>
+            സ്വർണ്ണതിളക്കമുള്ളതാക്കും.<br>
+            സ്നേഹപൂർവ്വം,<br>
+            ലിസ്ലിൻ കുടുംബം
           </div>
         </section>
 
-        <div class="grid md:grid-cols-2 gap-10 mb-16">
-          <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
+        <!-- FIXED: photo1.jpg FIRST, photo2.jpg SECOND -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
           <img src="photos/photo1.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
+          <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
         </div>
 
         <div class="text-center mb-16">
@@ -209,40 +223,32 @@
           <div class="divider mt-12"></div>
         </div>
 
-        <!-- TIMELINE — TEXT NEXT TO BULLETS, VINE FLOWING BEHIND -->
         <section class="vine-container mb-20">
-          <h2 class="text-center text-4xl playfair text-gold-bright mb-20 relative z-10">Event Timeline</h2>
+          <h2 class="text-center text-4xl playfair text-gold-bright mb-24 relative z-10 -mt-8">
+            Event Timeline
+          </h2>
 
-          <!-- Golden Vine Path -->
           <svg id="vine-path" viewBox="0 0 800 1000" preserveAspectRatio="none">
-            <path d="M60,100 Q180,220 140,380 Q110,520 300,620 Q520,720 680,820 Q740,880 710,960" />
+            <path d="M60,120 Q180,240 140,400 Q110,540 300,640 Q520,740 680,840 Q740,900 710,980" />
           </svg>
 
-          <!-- Bullets + Text (perfectly aligned) -->
-          <div class="vine-bullet" style="top: 12%; left: 9%;"></div>
-          <div class="timeline-item" style="top: 10%; left: 14%;">12:30 PM — Gathering & Welcome</div>
+          <div class="vine-bullet" style="top: 14%; left: 9%;"></div>
+          <div class="timeline-item" style="top: 12%; left: 14%;">12:30 PM — Gathering & Welcome</div>
 
-          <div class="vine-bullet" style="top: 34%; left: 20%;"></div>
-          <div class="timeline-item" style="top: 32%; left: 25%;">1:00 PM — Ceremony & Tributes</div>
+          <div class="vine-bullet" style="top: 36%; left: 20%;"></div>
+          <div class="timeline-item" style="top: 34%; left: 25%;">1:00 PM — Ceremony & Tributes</div>
 
-          <div class="vine-bullet" style="top: 56%; left: 36%;"></div>
-          <div class="timeline-item" style="top: 54%; left: 42%;">1:30 PM — Lunch & Celebration</div>
+          <div class="vine-bullet" style="top: 58%; left: 36%;"></div>
+          <div class="timeline-item" style="top: 56%; left: 42%;">1:30 PM — Lunch & Celebration</div>
 
-          <div class="vine-bullet" style="top: 78%; left: 70%;"></div>
-          <div class="timeline-item" style="top: 76%; left: 58%;">3:30 PM — Closing & Group Photos</div>
+          <div class="vine-bullet" style="top: 80%; left: 70%;"></div>
+          <div class="timeline-item" style="top: 78%; left: 58%;">3:30 PM — Closing & Group Photos</div>
         </section>
 
-        <!-- DRESS CODE — VINTAGE KERALA, CHILL & FUN -->
-        <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg">
-          <h2 class="text-center text-4xl playfair text-gold-bright mb-8">DRESS CODE</h2>
-          <p class="text-center text-2xl playfair italic text-gold-dark mb-6">
-            Smart casuals or Kerala ethnic wear
-          </p>
-          <p class="text-center text-lg leading-relaxed max-w-2xl mx-auto">
-            Think <span class="font-bold text-gold-bright">vintage Kerala</span> — crisp mundu with golden border, 
-            off-white kasavu saree swaying in the evening breeze, or your comfiest linen shirt 
-            paired with a silk jubbah. No fuss, just love, laughter, and a touch of old-world Kochi charm. 
-            Come as you are — as long as it feels like a warm hug from the 60s.
+        <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg text-center">
+          <h2 class="text-4xl playfair text-gold-bright mb-8">DRESS CODE</h2>
+          <p class="text-xl text-gold-dark">
+            Smart casuals / Kerala ethnic wear
           </p>
         </section>
 
@@ -256,7 +262,6 @@
     </div>
   </div>
 
-  <!-- PAPER PLANE FLIES ALONG THE VINE — SMOOTH & VISIBLE -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const plane = document.getElementById('paper-plane');
@@ -292,7 +297,6 @@
       window.addEventListener('resize', updatePlane);
       requestAnimationFrame(updatePlane);
 
-      // Fade-in sections
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
