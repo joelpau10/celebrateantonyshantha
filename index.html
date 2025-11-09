@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Antony & Shantha — 60th Anniversary & 80th Birthday</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     /* === GOLD & VINTAGE STYLE === */
     .gold { color: #b78b1e; }
@@ -21,40 +23,28 @@
     /* === BACKGROUND (aged paper texture) === */
     body {
       background-color: #fdfbf7;
-      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-                        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-image:
+        radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
       background-size: 6px 6px, 400px 400px;
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
 
-    /* === FLOATING FLOWER (scroll-triggered) === */
+    /* === FLOATING FLOWER === */
     .floating-flower {
       position: fixed;
       top: 0;
       left: 50%;
       transform: translateX(-50%) rotate(0deg);
-      width: 60px;
-      opacity: 0.8;
+      width: 80px;
+      opacity: 0.9;
       pointer-events: none;
       transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+      z-index: 10;
     }
 
-    /* === ORNAMENTS === */
-    .ornament-top, .ornament-bottom {
-      position: absolute;
-      width: 120px;
-      height: 30px;
-      background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/9/9f/Vintage_decorative_flourish.svg');
-      opacity: 0.15;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .ornament-top { top: -40px; rotate: 180deg; }
-    .ornament-bottom { bottom: -40px; }
-
-    /* === Decorative Divider === */
+    /* === ORNAMENTAL DIVIDER === */
     .divider {
       display: inline-block;
       width: 80px;
@@ -62,22 +52,55 @@
       background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg');
       opacity: 0.85;
     }
-  </style>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    /* === VINTAGE FRAME === */
+    .vintage-frame {
+      position: relative;
+      padding: 2.5rem;
+      border: 1.5px solid rgba(183,139,30,0.4);
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 0 30px rgba(183,139,30,0.08),
+                  0 8px 24px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .vintage-frame::before,
+    .vintage-frame::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/d/da/Ornamental_corner_flourish_gold.svg') no-repeat center/contain;
+      opacity: 0.25;
+      animation: shimmer 6s ease-in-out infinite;
+    }
+
+    .vintage-frame::before {
+      top: -20px;
+      left: -20px;
+      transform: rotate(0deg);
+    }
+
+    .vintage-frame::after {
+      bottom: -20px;
+      right: -20px;
+      transform: rotate(180deg);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.25; filter: brightness(1); }
+      50% { opacity: 0.45; filter: brightness(1.2); }
+    }
+  </style>
 </head>
 
 <body class="text-gray-800 antialiased selection:bg-yellow-100 selection:text-yellow-900">
 
   <!-- FLOATING FLOWER -->
-  <img src="photos/flower.png" alt="Floating flower" class="floating-flower" id="floatingFlower">
+  <img src="photos/flower.png" alt="Floating flower" class="floating-flower" id="floatingFlower" onerror="this.style.display='none'">
 
-  <main class="min-h-screen flex items-center justify-center py-12 px-6 relative">
-    <div class="max-w-3xl w-full bg-white/90 rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm relative overflow-hidden">
-
-      <!-- ornamental decorations -->
-      <div class="ornament-top"></div>
-      <div class="ornament-bottom"></div>
+  <main class="min-h-[180vh] flex items-center justify-center py-12 px-6 relative">
+    <div class="max-w-3xl w-full rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm relative overflow-hidden bg-white/90">
 
       <!-- HEADER -->
       <header class="text-center mb-8">
@@ -93,18 +116,19 @@
 
       <!-- PHOTO -->
       <div class="rounded-2xl overflow-hidden vintage-filter mb-8 soft-shadow">
-        <img src="photos/photo1.jpg" alt="Antony & Shantha" class="w-full h-72 object-cover">
+        <img src="photos/photo1.jpg" alt="Antony & Shantha" class="w-full h-72 object-cover" onerror="this.style.display='none'">
       </div>
 
       <!-- MESSAGE -->
-      <section class="text-center relative">
+      <section class="text-center relative vintage-frame">
         <h2 class="text-2xl md:text-3xl elegant gold mb-4">A Lifetime of Love</h2>
         <div class="divider mx-auto mb-4"></div>
         <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
-          Join us as we honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> — 
-          celebrating <strong>60 years of cherished togetherness</strong> and the <strong>80th birthday</strong> 
-          of our beloved Shantha. Their journey has been a story of love, faith, and laughter that continues 
-          to light up all our lives.
+          Join us as we honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> —
+          celebrating <strong>60 years of cherished togetherness</strong> and the
+          <strong>80th birthday</strong> of our beloved Shantha.
+          Their journey has been a story of love, faith, and laughter
+          that continues to light up all our lives.
         </p>
       </section>
 
@@ -136,7 +160,7 @@
       <div class="mt-8 text-sm text-gray-600 text-center">
         <p><strong>Dress Code:</strong> Gold &amp; White — Vintage Elegant</p>
         <p class="mt-2 max-w-xl mx-auto">
-          Please arrive 15 minutes early. Your presence is the greatest gift — 
+          Please arrive 15 minutes early. Your presence is the greatest gift —
           if you wish, share a note or memory for the couple to cherish.
         </p>
       </div>
@@ -154,12 +178,15 @@
     const flower = document.getElementById('floatingFlower');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const rotate = scrollY / 4; // rotate slower
-      const translateY = scrollY * 0.6; // move gently down
+      const rotate = scrollY / 3;
+      const translateY = scrollY * 0.6;
       const opacity = Math.max(0.2, 1 - scrollY / 800);
-      flower.style.transform = `translateX(-50%) translateY(${translateY}px) rotate(${rotate}deg)`;
-      flower.style.opacity = opacity;
+      if (flower) {
+        flower.style.transform = `translateX(-50%) translateY(${translateY}px) rotate(${rotate}deg)`;
+        flower.style.opacity = opacity;
+      }
     });
   </script>
+
 </body>
 </html>
