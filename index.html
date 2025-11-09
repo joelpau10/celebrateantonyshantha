@@ -6,7 +6,7 @@
   <title>Kuttan & Shantha — 60th Anniversary & 80th Birthday</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -30,7 +30,24 @@
     .cinzel-light { font-family: 'Cinzel Decorative', cursive; font-weight: 400; }
     .text-gold { color: var(--gold-dark); }
 
-    /* Very light golden border */
+    /* Screenshot-perfect "60 Years..." */
+    .subtitle-60years {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 2.8rem;
+      line-height: 1.25;
+      letter-spacing: 1.2px;
+      color: #b89f6e;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .subtitle-60years {
+        font-size: 4.2rem;
+        letter-spacing: 1.5px;
+      }
+    }
+
+    /* Light golden border */
     .gold-frame {
       background: linear-gradient(45deg, #f1e4c3, #e8d5a3, #f1e4c3);
       padding: 3px;
@@ -59,16 +76,7 @@
       color: var(--gold);
     }
 
-    #floating-lotus {
-      position: absolute;
-      width: 56px;
-      height: 56px;
-      pointer-events: none;
-      z-index: 10;
-      filter: drop-shadow(0 8px 16px rgba(184,134,11,0.25));
-      opacity: 0.92;
-    }
-
+    /* Tilda-style dotted golden line */
     .timeline::before {
       content: '';
       position: absolute;
@@ -76,12 +84,28 @@
       top: 0;
       width: 2px;
       height: 100%;
-      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      background: repeating-linear-gradient(to bottom, var(--gold-dark) 0, var(--gold-dark) 10px, transparent 10px, transparent 20px);
       transform: translateX(-50%);
+      opacity: 0.6;
+      z-index: 1;
     }
     @media (max-width: 768px) {
       .timeline::before { left: 36px; }
-      #floating-lotus { left: 36px !important; }
+    }
+
+    /* Your paperplane.png – floating magic */
+    #paper-plane {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      pointer-events: none;
+      z-index: 10;
+      filter: drop-shadow(0 8px 16px rgba(184,134,11,0.3));
+      opacity: 0.95;
+      transition: transform 0.1s ease-out;
+    }
+    @media (max-width: 768px) {
+      #paper-plane { left: 36px !important; }
     }
   </style>
 </head>
@@ -93,20 +117,22 @@
 
   <div class="max-w-4xl mx-auto px-6 py-12 relative">
 
-    <!-- Floating Lotus – uses your lotus.png -->
-    <img id="floating-lotus" src="photos/lotus.png" alt="Golden Lotus" onerror="this.style.display='none'">
+    <!-- Tilda Paper-Plane – uses YOUR photos/paperplane.png -->
+    <img id="paper-plane" src="photos/paperplane.png" alt="Paper Plane" onerror="this.style.display='none'">
 
     <div class="gold-frame my-12">
       <div class="inner-card p-10 md:p-16">
 
         <!-- Header -->
         <header class="text-center mb-16">
-          <h1 class="cinzel-light text-5xl md:text-7xl text-gold mb-6 tracking-wide leading-snug">
+          <h1 class="cinzel-light text-5xl md:text-7xl text-gold mb-8 tracking-wide leading-snug">
             Kuttan & Shantha
           </h1>
-          <p class="playfair text-4xl md:text-5xl text-gold-dark mb-10 leading-relaxed">
-            60 Years of Love ❤️ & Shantha’s 80th Birthday
+          
+          <p class="subtitle-60years mb-10">
+            60 Years of Love & Shantha’s 80th Birthday
           </p>
+          
           <div class="divider"></div>
           <p class="text-2xl md:text-3xl playfair font-medium">DEAR FAMILY AND FRIENDS</p>
         </header>
@@ -137,7 +163,7 @@
           <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
         </div>
 
-        <!-- Date & Venue – same font, no gold/italic -->
+        <!-- Date & Venue -->
         <div class="text-center mb-16">
           <div class="flex items-center justify-center gap-5 mb-8">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#b89f6e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -237,37 +263,39 @@
     </div>
   </div>
 
-  <!-- Floating Lotus Animation (uses your lotus.png) -->
+  <!-- Tilda Paper-Plane Floating Animation -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const lotus = document.getElementById('floating-lotus');
+      const plane = document.getElementById('paper-plane');
       const timeline = document.querySelector('.timeline');
-      if (lotus && timeline) {
-        const updateLotus = () => {
-          const rect = timeline.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          const scrollTop = window.scrollY;
-          const timelineTop = rect.top + scrollTop;
-          const timelineHeight = rect.height;
+      if (!plane || !timeline) return;
 
-          let progress = (scrollTop + windowHeight * 0.6 - timelineTop) / timelineHeight;
-          progress = Math.max(0, Math.min(1, progress));
+      const updatePlane = () => {
+        const rect = timeline.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.scrollY;
+        const timelineTop = rect.top + scrollTop;
+        const timelineHeight = rect.height;
 
-          const centerX = rect.left + rect.width / 2;
-          const wobble = Math.sin(progress * Math.PI * 4) * 18;
-          const y = rect.top + progress * timelineHeight - 32;
+        let progress = (scrollTop + windowHeight * 0.55 - timelineTop) / timelineHeight;
+        progress = Math.max(0, Math.min(1, progress));
 
-          lotus.style.left = (centerX + wobble) + 'px';
-          lotus.style.top = y + 'px';
-          lotus.style.transform = `rotate(${progress * 360}deg)`;
-          lotus.style.opacity = 0.92 - progress * 0.35;
-        };
-        window.addEventListener('scroll', () => requestAnimationFrame(updateLotus));
-        window.addEventListener('resize', updateLotus);
-        updateLotus();
-      }
+        const centerX = rect.left + rect.width / 2;
+        const wobble = Math.sin(progress * Math.PI * 6) * 22;
+        const tilt = Math.sin(progress * Math.PI * 3) * 12;
+        const y = rect.top + progress * timelineHeight - 40;
 
-      // Fade-in
+        plane.style.left = (centerX + wobble) + 'px';
+        plane.style.top = y + 'px';
+        plane.style.transform = `rotate(${tilt}deg) scale(${0.9 + progress * 0.2})`;
+        plane.style.opacity = 0.95 - progress * 0.5;
+      };
+
+      window.addEventListener('scroll', () => requestAnimationFrame(updatePlane));
+      window.addEventListener('resize', updatePlane);
+      updatePlane();
+
+      // Fade-in on scroll
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -277,7 +305,7 @@
         });
       }, { threshold: 0.15 });
 
-      document.querySelectorAll('section, header > *, .inner-card > *, img').forEach(el => {
+      document.querySelectorAll('section, header > *, .inner-card > *, img:not(#paper-plane)').forEach(el => {
         el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-1000', 'ease-out');
         observer.observe(el);
       });
