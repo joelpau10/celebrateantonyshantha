@@ -1,192 +1,397 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Antony & Shantha — 60th Anniversary & 80th Birthday</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Great+Vibes&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind from CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* === GOLD & VINTAGE STYLE === */
-    .gold { color: #b78b1e; }
-    .gold-border { border-color: rgba(183,139,30,0.4); }
-    .vintage-filter { filter: sepia(0.08) contrast(1.05) brightness(1.02); }
-    .soft-shadow { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-    .elegant { font-family: "Playfair Display", serif; }
-    .fade-in { animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Palette & basics */
+    :root{
+      --gold:#b78b1e;
+      --gold-soft: rgba(183,139,30,0.12);
+      --paper:#fdfbf7;
     }
-
-    /* === BACKGROUND (aged paper texture) === */
-    body {
-      background-color: #fdfbf7;
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:#2b2b2b;
+      background: var(--paper);
       background-image:
         radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
         url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      background-size: 6px 6px, 400px 400px;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
+      background-size:6px 6px,400px 400px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    /* === FLOATING FLOWER === */
-    .floating-flower {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%) rotate(0deg);
-      width: 80px;
-      opacity: 0.9;
-      pointer-events: none;
-      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-      z-index: 10;
+    /* Card container */
+    .card {
+      background: rgba(255,255,255,0.94);
+      border: 1.5px solid rgba(183,139,30,0.25);
+      border-radius:1.25rem;
+      padding:2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06), inset 0 0 30px rgba(183,139,30,0.04);
+      position:relative;
+      overflow:visible;
     }
 
-    /* === ORNAMENTAL DIVIDER === */
+    /* Headers / fonts */
+    .names {
+      font-family: "Great Vibes", serif;
+      color: var(--gold);
+      font-size: 3.0rem;
+      line-height:1;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      color: #4b4b4b;
+      margin-top:.4rem;
+    }
+    .meta {
+      color:#666;
+      font-size:.95rem;
+      margin-top:.45rem;
+      letter-spacing:.4px;
+    }
+
+    /* Divider ornament */
     .divider {
-      display: inline-block;
-      width: 80px;
-      height: 20px;
+      display:inline-block;
+      width:78px;
+      height:20px;
       background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg');
-      opacity: 0.85;
+      opacity:.95;
+      margin-top:.8rem;
     }
 
-    /* === VINTAGE FRAME === */
-    .vintage-frame {
-      position: relative;
-      padding: 2.5rem;
-      border: 1.5px solid rgba(183,139,30,0.4);
-      background-color: rgba(255, 255, 255, 0.9);
-      box-shadow: inset 0 0 30px rgba(183,139,30,0.08),
-                  0 8px 24px rgba(0,0,0,0.05);
-      overflow: hidden;
+    /* Photo portrait style (inverted rectangle) */
+    .photo-portrait {
+      width:100%;
+      aspect-ratio: 3/4; /* taller than wide (portrait) */
+      object-fit: cover;
+      border-radius: .75rem;
+      display:block;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
     }
 
+    /* Secondary photo above Lifetime of Love */
+    .photo-secondary {
+      width:220px;
+      height:220px;
+      object-fit:cover;
+      border-radius: .5rem;
+      display:block;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    /* Vintage frame around message */
+    .vintage-frame{
+      position:relative;
+      padding:2rem;
+      border-radius: .75rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(183,139,30,0.14);
+      box-shadow: inset 0 0 40px rgba(183,139,30,0.03);
+      overflow:visible;
+    }
+
+    /* corner ornaments with shimmer */
     .vintage-frame::before,
-    .vintage-frame::after {
-      content: "";
-      position: absolute;
-      width: 80px;
-      height: 80px;
+    .vintage-frame::after{
+      content:"";
+      position:absolute;
+      width:72px;
+      height:72px;
       background: url('https://upload.wikimedia.org/wikipedia/commons/d/da/Ornamental_corner_flourish_gold.svg') no-repeat center/contain;
-      opacity: 0.25;
+      opacity:0.18;
+      filter: drop-shadow(0 1px 0 rgba(0,0,0,0.03));
       animation: shimmer 6s ease-in-out infinite;
+      pointer-events:none;
     }
-
-    .vintage-frame::before {
-      top: -20px;
-      left: -20px;
-      transform: rotate(0deg);
-    }
-
-    .vintage-frame::after {
-      bottom: -20px;
-      right: -20px;
-      transform: rotate(180deg);
-    }
+    .vintage-frame::before{ top:-20px; left:-20px; transform:rotate(0deg) }
+    .vintage-frame::after{ bottom:-20px; right:-20px; transform:rotate(180deg) }
 
     @keyframes shimmer {
-      0%, 100% { opacity: 0.25; filter: brightness(1); }
-      50% { opacity: 0.45; filter: brightness(1.2); }
+      0%,100% { opacity:0.16; filter:brightness(1) }
+      50% { opacity:0.36; filter:brightness(1.18) }
+    }
+
+    /* Timeline layout */
+    .timeline-wrap{
+      position:relative;
+      margin-top:2.25rem;
+      margin-bottom:2.25rem;
+      padding-left:1rem;
+      padding-right:1rem;
+    }
+    .timeline {
+      position: relative;
+      width:100%;
+      max-width:720px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* dotted center line */
+    .timeline-line {
+      position:absolute;
+      left:50%;
+      top:0;
+      transform:translateX(-50%);
+      width:2px;
+      height:100%;
+      background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+      background-size: 2px 12px;
+      opacity:0.18;
+    }
+
+    /* timeline item */
+    .tl-item {
+      position:relative;
+      width:50%;
+      padding:1rem 2rem;
+      box-sizing:border-box;
+    }
+    .tl-left { left:0; text-align:right; margin-left:0; margin-right:auto }
+    .tl-right { left:50%; text-align:left }
+    .tl-time { font-weight:600; color:#2f2f2f; font-size:0.98rem }
+    .tl-desc { color:#585858; font-size:.96rem; margin-top:.25rem }
+
+    /* timeline marker (station) */
+    .tl-marker {
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background: var(--paper);
+      border: 2px solid var(--gold);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      z-index:5;
+    }
+
+    /* Blossom (SVG) controlled by JS - placed on the center line */
+    .blossom {
+      position:absolute;
+      left:50%;
+      transform:translate(-50%, -12px);
+      width:36px;
+      height:36px;
+      z-index:8;
+      pointer-events:none;
+      transition: transform 0.12s linear;
+      filter: drop-shadow(0 6px 12px rgba(183,139,30,0.12));
+    }
+
+    /* Dress code */
+    .dresscode { color:#4a4a4a; font-size:.95rem; margin-top:.8rem; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px){
+      .names { font-size: 2.2rem }
+      .timeline { padding: 1.2rem 0 }
+      .tl-item { width:100%; left:0; text-align:left; padding-left:3.5rem; padding-right:1rem }
+      .tl-left, .tl-right { left:0 }
+      .timeline-line { left:36px }
+      .tl-marker { left:36px; transform:translateX(-50%) }
+      .blossom { left:36px }
     }
   </style>
 </head>
+<body>
 
-<body class="text-gray-800 antialiased selection:bg-yellow-100 selection:text-yellow-900">
+  <main class="min-h-[160vh] flex items-start justify-center py-12 px-6">
+    <div class="max-w-3xl w-full card">
 
-  <!-- FLOATING FLOWER -->
-  <img src="photos/flower.png" alt="Floating flower" class="floating-flower" id="floatingFlower" onerror="this.style.display='none'">
-
-  <main class="min-h-[180vh] flex items-center justify-center py-12 px-6 relative">
-    <div class="max-w-3xl w-full rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm relative overflow-hidden bg-white/90">
-
-      <!-- HEADER -->
-      <header class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl elegant gold">Antony &amp; Shantha</h1>
-        <p class="mt-2 text-lg md:text-xl text-gray-700 italic">
-          Celebrating 60 years of love<br>and Shantha’s 80th Birthday
-        </p>
-        <div class="mt-4 text-sm text-gray-600 tracking-wide">
-          23<sup>rd</sup> December 2025 • Avenue Regent, Kochi
+      <!-- Header -->
+      <header class="text-center mb-6">
+        <div class="names">Antony &amp; Shantha</div>
+        <div class="subtitle">
+          Celebrating 60 years of love ❤️ and Shantha’s 80th Birthday 🎂
         </div>
-        <div class="mt-5 divider mx-auto"></div>
+        <div class="meta">23<sup>rd</sup> December 2025 • <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener" class="underline text-gray-700">7th Floor, Regent Hall, The Avenue Regent, Kochi</a></div>
+        <div class="divider mx-auto"></div>
       </header>
 
-      <!-- PHOTO -->
-      <div class="rounded-2xl overflow-hidden vintage-filter mb-8 soft-shadow">
-        <img src="photos/photo1.jpg" alt="Antony & Shantha" class="w-full h-72 object-cover" onerror="this.style.display='none'">
+      <!-- Top portrait photo -->
+      <div class="mb-6">
+        <!-- portrait/inverted rectangle - ensure photo1.jpg is tall (use a vertical crop) -->
+        <img src="photos/photo1.jpg" alt="Antony and Shantha" class="photo-portrait" onerror="this.style.display='none'">
       </div>
 
-      <!-- MESSAGE -->
-      <section class="text-center relative vintage-frame">
-        <h2 class="text-2xl md:text-3xl elegant gold mb-4">A Lifetime of Love</h2>
-        <div class="divider mx-auto mb-4"></div>
-        <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
-          Join us as we honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> —
-          celebrating <strong>60 years of cherished togetherness</strong> and the
-          <strong>80th birthday</strong> of our beloved Shantha.
-          Their journey has been a story of love, faith, and laughter
-          that continues to light up all our lives.
+      <!-- Secondary photo above the "Lifetime of Love" -->
+      <div class="text-center mb-4">
+        <img src="photos/photo2.jpg" alt="Couple full body" class="photo-secondary" onerror="this.style.display='none'">
+      </div>
+
+      <!-- Message framed -->
+      <section class="vintage-frame mb-6">
+        <h2 class="text-2xl font-semibold" style="color:var(--gold); font-family:'Cormorant Garamond', serif;">A Lifetime of Love</h2>
+        <div class="divider mx-auto my-4"></div>
+        <p style="color:#4f4f4f; line-height:1.6; max-width:48rem; margin:0 auto;">
+          Join us to honor <strong>Antony Mampilly</strong> and <strong>Shantha Antony</strong> — celebrating six decades of devoted companionship and the 80th birthday of our beloved Shantha. Their lives together have been stitched with kindness, quiet laughter, and an enduring tenderness that continues to guide us.
         </p>
       </section>
 
-      <!-- DETAILS -->
-      <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
-        <div class="border border-gray-200 rounded-xl py-4 bg-white/60">
-          <h3 class="text-sm uppercase text-gray-500 tracking-wider">When</h3>
-          <p class="mt-1 text-gray-800 font-medium">23<sup>rd</sup> December 2025<br>5:00 PM onwards</p>
-        </div>
-        <div class="border border-gray-200 rounded-xl py-4 bg-white/60">
-          <h3 class="text-sm uppercase text-gray-500 tracking-wider">Where</h3>
-          <p class="mt-1 text-gray-800 font-medium">Avenue Regent, Kochi</p>
-        </div>
-      </section>
+      <!-- Timeline with blossom -->
+      <div class="timeline-wrap">
+        <div class="timeline">
 
-      <!-- BUTTONS -->
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="mailto:rsvp@family.com?subject=RSVP%20-%20Antony%20%26%20Shantha"
-           class="px-6 py-3 rounded-lg border border-yellow-500 bg-yellow-50 text-yellow-800 font-medium hover:bg-yellow-100 transition">
-          RSVP via Email
-        </a>
-        <button onclick="window.print()"
-           class="px-6 py-3 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition">
-          Print Invitation
-        </button>
+          <!-- center dotted line -->
+          <div class="timeline-line" aria-hidden="true"></div>
+
+          <!-- blossom SVG - positioned absolutely, JS will move it down the timeline -->
+          <svg class="blossom" id="blossom" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- subtle gold stylized blossom -->
+            <defs>
+              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#f6e7b8"/>
+                <stop offset="1" stop-color="#cfa64a"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(32,32)">
+              <circle r="6" fill="url(#g)" opacity="0.98" />
+              <path d="M0 -12 C6 -8 12 -8 12 0 C12 8 6 12 0 12 C-6 12 -12 8 -12 0 C-12 -8 -6 -8 0 -12 Z" fill="#f3d98b" opacity="0.95"/>
+              <circle r="2.2" fill="#b78b1e"/>
+            </g>
+          </svg>
+
+          <!-- Each timeline item -->
+          <div class="tl-item tl-left" style="top:0; position:relative;">
+            <div class="tl-time">12:30 PM</div>
+            <div class="tl-desc">Gathering</div>
+          </div>
+
+          <!-- marker placed roughly near first item -->
+          <div class="tl-marker" style="top:36px;"></div>
+
+          <div style="height:40px;"></div>
+
+          <div class="tl-item tl-right" style="position:relative;">
+            <div class="tl-time">1:00 PM</div>
+            <div class="tl-desc">Commencement</div>
+          </div>
+
+          <div class="tl-marker" style="top:170px;"></div>
+
+          <div style="height:40px;"></div>
+
+          <div class="tl-item tl-left" style="position:relative;">
+            <div class="tl-time">1:30 PM</div>
+            <div class="tl-desc">Lunch</div>
+          </div>
+
+          <div class="tl-marker" style="top:320px;"></div>
+
+          <div style="height:40px;"></div>
+
+          <div class="tl-item tl-right" style="position:relative;">
+            <div class="tl-time">3:30 PM</div>
+            <div class="tl-desc">Closing</div>
+          </div>
+
+          <div class="tl-marker" style="top:470px;"></div>
+
+          <!-- spacer to extend timeline length -->
+          <div style="height:120px;"></div>
+        </div>
       </div>
 
-      <!-- DRESS CODE -->
-      <div class="mt-8 text-sm text-gray-600 text-center">
-        <p><strong>Dress Code:</strong> Gold &amp; White — Vintage Elegant</p>
-        <p class="mt-2 max-w-xl mx-auto">
-          Please arrive 15 minutes early. Your presence is the greatest gift —
-          if you wish, share a note or memory for the couple to cherish.
+      <!-- Dress code -->
+      <div class="dresscode vintage-frame">
+        <p style="margin:0 0 .5rem 0; font-style:italic;">
+          Whether in silk or shimmer, velvets or lace — let’s meet in timeless grace.
         </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="min-width:200px">
+            <div style="font-weight:600;color:#333">Men</div>
+            <div>Beige shirt / kurta and pants</div>
+          </div>
+          <div style="min-width:200px">
+            <div style="font-weight:600;color:#333">Women</div>
+            <div>Gold or beige lehenga / salwar / saree (silk, shimmer, velvet, or lace welcome)</div>
+          </div>
+        </div>
       </div>
 
-      <!-- FOOTER -->
-      <footer class="mt-10 text-center text-gray-500 text-sm italic">
+      <!-- Footer -->
+      <footer class="text-center mt-6" style="color:#6b6b6b;font-size:.95rem;">
         <div class="divider mx-auto mb-3"></div>
-        <p>With love and gratitude — The Family of Antony &amp; Shantha</p>
+        <div>With love and gratitude — The Family of Antony &amp; Shantha</div>
       </footer>
+
     </div>
   </main>
 
-  <!-- SCROLL SCRIPT -->
+  <!-- JavaScript: move the blossom along the timeline as the user scrolls -->
   <script>
-    const flower = document.getElementById('floatingFlower');
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const rotate = scrollY / 3;
-      const translateY = scrollY * 0.6;
-      const opacity = Math.max(0.2, 1 - scrollY / 800);
-      if (flower) {
-        flower.style.transform = `translateX(-50%) translateY(${translateY}px) rotate(${rotate}deg)`;
-        flower.style.opacity = opacity;
-      }
-    });
-  </script>
+    (function(){
+      const blossom = document.getElementById('blossom');
+      const timeline = document.querySelector('.timeline');
+      if(!blossom || !timeline) return;
 
+      // compute usable zone: from timeline top to timeline bottom
+      function updateBlossom(){
+        const rect = timeline.getBoundingClientRect();
+        const viewH = window.innerHeight || document.documentElement.clientHeight;
+        // define start (when center of viewport reaches top of timeline)
+        const start = rect.top - viewH * 0.2;
+        const end = rect.bottom - viewH * 0.2;
+        const total = end - start;
+        const sc = window.scrollY || window.pageYOffset;
+
+        // compute progress using viewport-relative measurement
+        const viewportCenter = sc + (viewH * 0.45);
+        let progress = (viewportCenter - (window.scrollY + rect.top)) / (rect.height);
+        // alternative safe progress using page offsets:
+        const pageTop = rect.top + window.scrollY;
+        progress = (viewportCenter - pageTop) / rect.height;
+        // clamp:
+        progress = Math.max(0, Math.min(1, progress));
+
+        // compute y within timeline container
+        const y = rect.top + progress * rect.height;
+        // convert to local position relative to timeline top
+        const localY = progress * rect.height;
+
+        // place blossom (centered on the dotted line)
+        const left = (rect.left + rect.width/2);
+        blossom.style.transform = `translate(-50%, ${localY - 12}px) rotate(${progress * 360}deg)`;
+        // adjust opacity slightly
+        blossom.style.opacity = (0.85 - progress * 0.45);
+      }
+
+      // throttle scroll for performance
+      let ticking = false;
+      window.addEventListener('scroll', function(){
+        if(!ticking){
+          window.requestAnimationFrame(function(){
+            updateBlossom();
+            ticking = false;
+          });
+        }
+        ticking = true;
+      }, {passive:true});
+
+      // initial call
+      window.addEventListener('load', updateBlossom);
+      window.addEventListener('resize', updateBlossom);
+    })();
+  </script>
 </body>
 </html>
