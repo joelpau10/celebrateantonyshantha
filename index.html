@@ -81,7 +81,6 @@
       color: var(--gold);
     }
 
-    /* PERFECTLY CENTERED + PULLED LEFT ON MOBILE */
     .message-card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
@@ -96,7 +95,6 @@
       .message-card { text-align: left; padding: 2rem; }
     }
 
-    /* TIMELINE — TITLE RIGHT BELOW DIVIDER */
     .timeline-title {
       margin-top: -2rem;
       padding-top: 4rem;
@@ -129,6 +127,8 @@
       box-shadow: 0 0 35px rgba(212, 175, 55, 1);
       z-index: 9;
     }
+
+    /* TEXT PUSHED FURTHER RIGHT, BULLETS FURTHER LEFT */
     .timeline-item {
       position: absolute;
       z-index: 10;
@@ -136,12 +136,16 @@
       color: var(--gold-dark);
       text-shadow: 0 2px 8px rgba(184,159,110,0.3);
       font-size: 1.15rem;
-      left: 15% !important;
-      width: 80%;
+      left: 22% !important;
+      width: 70%;
       transform: translateY(-50%);
     }
     @media (min-width: 768px) {
-      .timeline-item { left: 28% !important; width: 65%; }
+      .timeline-item { 
+        left: 35% !important; 
+        width: 58%;
+        font-size: 1.2rem;
+      }
     }
 
     #paper-plane {
@@ -206,8 +210,8 @@
         </section>
 
         <div class="grid md:grid-cols-2 gap-8 mb-16">
-          <img src="photos/photo1.jpg?t=202512310002" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
-          <img src="photos/photo2.jpg?t=202512310002" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo1.jpg?t=202512310003" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
+          <img src="photos/photo2.jpg?t=202512310003" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform">
         </div>
 
         <div class="text-center mb-16">
@@ -235,7 +239,6 @@
           <div class="divider mt-12"></div>
         </div>
 
-        <!-- TIMELINE TITLE RIGHT BELOW DIVIDER -->
         <div class="text-center timeline-title">
           <h2 class="text-4xl playfair text-gold-bright">Event Timeline</h2>
         </div>
@@ -243,20 +246,20 @@
         <section class="vine-container mb-20">
 
           <svg id="vine-path" viewBox="0 0 800 1100" preserveAspectRatio="none">
-            <path d="M60,140 Q180,260 140,420 Q110,560 300,660 Q520,760 680,860 Q740,920 710,1060" />
+            <path d="M40,140 Q140,260 100,420 Q70,560 260,660 Q480,760 640,860 Q700,920 670,1060" />
           </svg>
 
-          <!-- BULLETS + TEXT PERFECTLY ALIGNED -->
-          <div class="vine-bullet" style="top: 14%; left: 8%;"></div>
+          <!-- BULLETS MORE LEFT, TEXT MORE RIGHT -->
+          <div class="vine-bullet" style="top: 14%; left: 5%;"></div>
           <div class="timeline-item" style="top: 14%;">12:30 PM — Gathering & Welcome</div>
 
-          <div class="vine-bullet" style="top: 36%; left: 18%;"></div>
+          <div class="vine-bullet" style="top: 36%; left: 12%;"></div>
           <div class="timeline-item" style="top: 36%;">1:00 PM — Ceremony & Tributes</div>
 
-          <div class="vine-bullet" style="top: 58%; left: 32%;"></div>
+          <div class="vine-bullet" style="top: 58%; left: 24%;"></div>
           <div class="timeline-item" style="top: 58%;">1:30 PM — Lunch & Celebration</div>
 
-          <div class="vine-bullet" style="top: 80%; left: 68%;"></div>
+          <div class="vine-bullet" style="top: 80%; left: 62%;"></div>
           <div class="timeline-item" style="top: 80%;">3:30 PM — Closing & Group Photos</div>
         </section>
 
