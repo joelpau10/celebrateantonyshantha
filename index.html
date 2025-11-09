@@ -8,381 +8,611 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
+  <!-- Tailwind (utilities used lightly) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    :root {
-      --gold: #b88a1d;
-      --gold-strong: #b27210;
-      --paper-deep: #f3e6cf;
+    :root{
+      --gold: #d8b24a;
+      --gold-mid: #b88a1d;
+      --gold-dark: #b27210;
+      --paper-deep: #efe0c8;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    html,body{height:100%;margin:0}
+    body {
+      font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       color:#2b2b2b;
       background-color: var(--paper-deep);
       background-image:
         radial-gradient(circle at 50% 45%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 15%, rgba(0,0,0,0.04) 100%),
         url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      background-size: cover, 450px 450px;
+      background-size: cover, 460px 460px;
       background-blend-mode: overlay;
-      -webkit-font-smoothing:antialiased;
       overflow-x:hidden;
+      padding: 32px 18px;
     }
 
-    main { padding-top: 56px; padding-bottom: 64px; }
-
+    /* Card with gilded border & subtle shimmer */
     .card {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
-      background: linear-gradient(180deg, rgba(255,253,246,0.96) 0%, rgba(255,255,252,0.95) 100%);
+      background: linear-gradient(180deg, rgba(255,253,246,0.98), rgba(255,255,250,0.97));
       border-radius: 18px;
-      padding: 34px;
-      border: 2.25px solid var(--gold);
-      box-shadow: 0 20px 50px rgba(18,18,18,0.08), inset 0 0 40px rgba(184,134,11,0.03);
       position: relative;
+      padding: 36px;
       overflow: visible;
+      box-shadow: 0 28px 60px rgba(6,6,6,0.12), inset 0 0 40px rgba(184,134,11,0.03);
     }
 
+    /* shimmer border: pseudo-element that sweeps a gradient around the edges */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 20px;
+      padding: 6px;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%,
+          rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.02) 50%,
+          rgba(255,255,255,0.0) 60%);
+      background-blend-mode: overlay;
+      z-index: 2;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: borderSweep 10s linear infinite;
+      /* outer golden ring */
+      box-shadow:
+        0 0 0 3px rgba(216,178,74,0.92) inset,
+        0 0 40px rgba(216,178,74,0.06) inset;
+    }
+
+    @keyframes borderSweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* corner flourishes */
     .corner {
       position: absolute;
-      width: 88px;
-      height: 88px;
+      width: 84px;
+      height: 84px;
       background: url('https://upload.wikimedia.org/wikipedia/commons/d/da/Ornamental_corner_flourish_gold.svg') no-repeat center/contain;
-      opacity: 0.18;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.05));
-      animation: cornerShimmer 6.5s ease-in-out infinite;
+      opacity: 0.22;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.06));
+      z-index: 4;
       pointer-events: none;
+      animation: cornerShimmer 6.5s ease-in-out infinite;
     }
-    .corner.top-left { top: -36px; left: -36px; transform: rotate(0deg) }
-    .corner.top-right { top: -36px; right: -36px; transform: rotate(90deg) }
-    .corner.bottom-left { bottom: -36px; left: -36px; transform: rotate(270deg) }
-    .corner.bottom-right { bottom: -36px; right: -36px; transform: rotate(180deg) }
+    .corner.top-left { top: -32px; left: -32px; transform: rotate(0deg) }
+    .corner.top-right { top: -32px; right: -32px; transform: rotate(90deg) }
+    .corner.bottom-left { bottom: -32px; left: -32px; transform: rotate(270deg) }
+    .corner.bottom-right { bottom: -32px; right: -32px; transform: rotate(180deg) }
 
     @keyframes cornerShimmer {
-      0%,100% { opacity: 0.16; filter: brightness(1) }
-      50% { opacity: 0.42; filter: brightness(1.25) }
+      0%,100%{ opacity:0.18 }
+      50%{ opacity:0.42; filter:brightness(1.25) }
     }
 
+    /* Heading typography */
     .title {
       font-family: "Playfair Display", serif;
-      color: var(--gold);
       font-weight:700;
-      font-size: 4rem;
-      line-height: .98;
-      letter-spacing: -1px;
+      color: var(--gold-mid);
+      font-size: 3.6rem;
+      line-height: .96;
       margin: 0;
+      letter-spacing: -1px;
+      text-align:center;
     }
-    .sub {
+    .subtitle {
       font-family: "Cormorant Garamond", serif;
       font-style: italic;
-      font-size: 1.04rem;
-      color:#555;
-      margin-top: 6px;
+      color:#5b5b5b;
+      margin-top: 8px;
+      text-align:center;
+      font-size:1.02rem;
     }
-    .meta {
-      color:#666;
-      margin-top:8px;
-      font-size:.96rem;
-    }
-    .decor-divider {
+    .meta { text-align:center; margin-top:10px; color:#666; font-size:.95rem }
+
+    .divider {
       width:84px;
-      height:20px;
-      background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg');
+      height:18px;
       margin: 14px auto 0;
-      opacity: .95;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg') no-repeat center/contain;
+      opacity:0.98;
     }
 
-    /* Fade effect setup */
-    .fade-item {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
+    /* photo sizing (both equal) */
+    .photos {
+      margin-top: 18px;
+      display:flex;
+      gap: 18px;
+      justify-content:center;
+      align-items:flex-start;
+      flex-direction: column;
+      align-items: center;
     }
-    .fade-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Equal photo design */
     .photo-wrapper {
-      position: relative;
       width: 100%;
-      max-width: 360px;
+      max-width: 420px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    .photo-same {
-      width: 100%;
+    .photo-wrapper.visible { opacity:1; transform: translateY(0) }
+    .photo {
+      width:100%;
       aspect-ratio: 3/4;
       object-fit: cover;
       border-radius: 12px;
-      display: block;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
-      border: 1.5px solid rgba(184,134,11,0.28);
-      transition: transform 0.6s ease, box-shadow 0.6s ease;
+      border: 1.75px solid rgba(216,178,74,0.28);
+      box-shadow: 0 18px 42px rgba(12,12,12,0.10);
+      transition: transform .6s ease, box-shadow .6s ease;
+      display:block;
     }
-    .photo-same:hover {
-      transform: scale(1.03);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
-    }
+    .photo:hover { transform: scale(1.03); box-shadow: 0 26px 60px rgba(12,12,12,0.14) }
 
-    .vintage-frame {
-      margin-top: 8px;
-      padding: 22px;
-      border-radius: 12px;
+    .vintage-text {
+      margin-top: 20px;
+      padding: 20px;
       background: rgba(255,255,250,0.98);
-      border: 1px solid rgba(184,134,11,0.12);
-      box-shadow: inset 0 0 40px rgba(184,134,11,0.02);
-      position: relative;
+      border-radius: 10px;
+      border: 1px solid rgba(216,178,74,0.08);
+      box-shadow: inset 0 0 30px rgba(216,178,74,0.02);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    .vintage-frame h2 { font-family:"Playfair Display",serif; color:var(--gold); font-size:1.6rem; margin:0; }
+    .vintage-text.visible { opacity:1; transform: translateY(0) }
 
-    /* timeline */
-    .timeline-wrap { margin-top: 28px; margin-bottom:28px; position:relative; }
-    .timeline { max-width:720px; margin: 0 auto; padding: 26px 10px; position: relative; }
+    .vintage-text h2 { font-family:"Playfair Display", serif; color: var(--gold-mid); margin:0 0 8px 0; font-size:1.5rem }
+
+    /* timeline: S-flow vertical with gold dotted line + arcs */
+    .timeline-wrap {
+      margin-top: 28px;
+      position: relative;
+      padding: 10px 20px 24px;
+    }
+    .timeline {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+      padding: 20px 10px;
+    }
+
+    /* Gold dotted center line (more visible) */
     .timeline-line {
       position:absolute;
       left:50%;
       transform:translateX(-50%);
       top:0;
-      width:2px;
+      width:6px;
       height:100%;
-      background-image: radial-gradient(var(--gold) 1px, transparent 1px);
-      background-size: 2px 12px;
-      opacity: 0.18;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 50%, var(--gold-mid) 60%, transparent 61%);
+      background-size: 6px 18px;
+      opacity: 0.95;
     }
-    .tl-item { width:50%; padding: 12px 18px; box-sizing:border-box; position:relative; }
-    .tl-left { left:0; text-align:right; float:left; clear:both; }
-    .tl-right { left:50%; text-align:left; float:right; clear:both; }
+
+    /* event bubble */
+    .tl-item {
+      width:48%;
+      box-sizing:border-box;
+      position:relative;
+      padding:14px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.98);
+      border: 1px solid rgba(0,0,0,0.03);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+      opacity:0;
+      transform: translateY(18px) translateX(0);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+    .tl-item.visible { opacity:1; transform: translateY(0) translateX(0) }
+    .tl-left { left: 2%; text-align: right; margin-left:0; float:left; clear:both; }
+    .tl-right { left: 50%; text-align: left; margin-left:0; float:right; clear:both; }
+
     .tl-time { font-weight:700; color:#222; font-size:1rem }
-    .tl-desc { color:#555; margin-top:6px }
+    .tl-desc { margin-top:6px; color:#575757 }
+
     .tl-marker {
       position:absolute;
       left:50%;
-      transform:translateX(-50%);
+      transform: translateX(-50%);
       width:18px; height:18px; border-radius:50%;
       background: var(--paper-deep);
-      border: 2px solid var(--gold);
+      border: 2px solid var(--gold-mid);
       box-shadow: 0 8px 18px rgba(0,0,0,0.06);
-      z-index:5;
+      z-index:6;
     }
 
-    .blossom {
+    /* gold arc connector (SVG path styled) */
+    .arc {
       position:absolute;
+      left:0; top:0;
+      pointer-events:none;
+      z-index:5;
+      opacity:0.9;
+      filter: drop-shadow(0 6px 14px rgba(184,134,11,0.06));
+    }
+    .arc path { stroke: url(#arcGrad); stroke-width: 2.6; stroke-linecap: round; fill: none; opacity:0.9 }
+
+    /* blossom (SVG) */
+    .blossom {
+      position: absolute;
       left:50%;
-      transform:translate(-50%,-12px);
-      width:40px;
-      height:40px;
+      transform: translate(-50%, -12px);
+      width:44px;
+      height:44px;
       z-index:8;
       pointer-events:none;
-      transition: transform .08s linear;
-      filter: drop-shadow(0 8px 18px rgba(184,134,11,0.12));
-      opacity:0.95;
+      transition: transform .06s linear;
+      filter: drop-shadow(0 10px 22px rgba(184,134,11,0.12));
+      opacity:0.98;
     }
 
+    /* section headings (matching title font style) */
     .section-heading {
       font-family:"Playfair Display", serif;
-      color: var(--gold-strong);
+      color: var(--gold-dark);
       text-align:center;
-      font-size: 1.6rem;
-      margin: 26px 0 10px 0;
-      letter-spacing: -0.6px;
+      font-size:1.4rem;
+      margin: 26px 0 8px 0;
     }
     .section-subdivider {
       width: 72px;
       height: 16px;
-      margin: 10px auto 0;
+      margin: 8px auto 0;
       background: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Ornament_divider_gold.svg') no-repeat center/contain;
-      opacity:0.95;
+      opacity:0.98;
     }
 
     .dresscode {
-      margin-top: 18px;
-      padding: 18px;
+      margin-top: 16px;
+      padding: 16px;
       border-radius:10px;
       background: rgba(255,255,250,0.98);
-      border:1px solid rgba(184,134,11,0.08);
+      border:1px solid rgba(216,178,74,0.08);
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity 1s ease, transform 1s ease;
     }
+    .dresscode.visible { opacity:1; transform: translateY(0) }
 
-    @media (max-width: 820px){
+    /* responsive adjustments */
+    @media (max-width:880px){
       .title { font-size: 2.6rem }
-      .tl-item{ width:100%; float:none; padding-left:56px }
-      .timeline-line { left:36px }
-      .tl-marker { left:36px; transform:translateX(-50%) }
-      .blossom { left:36px }
+      .card { padding: 22px }
+      .timeline { padding: 18px 6px; }
+      .tl-item { width:100%; float:none; margin: 12px 0 0 0; text-align:left }
+      .tl-left, .tl-right { left:0 }
+      .timeline-line { left:34px; transform:none; }
+      .blossom { left:34px }
+      .arc { display:none } /* hide arcs on smaller screens for clarity */
     }
   </style>
 </head>
 <body>
 
-  <main>
-    <div class="card">
+  <div class="card" id="cardRoot" role="main" aria-labelledby="eventTitle">
+    <!-- corners -->
+    <div class="corner top-left" aria-hidden="true"></div>
+    <div class="corner top-right" aria-hidden="true"></div>
+    <div class="corner bottom-left" aria-hidden="true"></div>
+    <div class="corner bottom-right" aria-hidden="true"></div>
 
-      <div class="corner top-left"></div>
-      <div class="corner top-right"></div>
-      <div class="corner bottom-left"></div>
-      <div class="corner bottom-right"></div>
+    <!-- Header -->
+    <header class="text-center fade-target" id="eventTitle" style="margin-bottom:6px;">
+      <h1 class="title">Kuttan &amp; Shantha</h1>
+      <div class="subtitle">Celebrating 60 years of love ❤️ and Shantha’s 80th Birthday 🎂</div>
+      <div class="meta">23<sup>rd</sup> December 2025 • <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener" class="underline text-gray-700">7th Floor, Regent Hall, The Avenue Regent, Kochi</a></div>
+      <div class="divider" role="presentation"></div>
+    </header>
 
-      <header class="text-center fade-item">
-        <h1 class="title">Kuttan &amp; Shantha</h1>
-        <div class="sub">Celebrating 60 years of love ❤️ and Shantha’s 80th Birthday 🎂</div>
-        <div class="meta">
-          23<sup>rd</sup> December 2025 • 
-          <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" class="underline text-gray-700">7th Floor, Regent Hall, The Avenue Regent, Kochi</a>
-        </div>
-        <div class="decor-divider"></div>
-      </header>
-
-      <!-- Equal-size Photos -->
-      <div class="mt-6 flex flex-col items-center space-y-8">
-        <div class="photo-wrapper fade-item">
-          <img src="photos/photo1.jpg" alt="Kuttan & Shantha" class="photo-same">
-        </div>
-        <div class="decor-divider"></div>
-        <div class="photo-wrapper fade-item">
-          <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="photo-same">
-        </div>
+    <!-- Photo 1 (above the message) -->
+    <div class="photos">
+      <div class="photo-wrapper fade-target" id="topPhoto">
+        <img src="photos/photo1.jpg" alt="Kuttan and Shantha" class="photo photo1" onerror="this.style.display='none'">
       </div>
-
-      <section class="vintage-frame mt-8 fade-item">
-        <h2>A Lifetime of Love</h2>
-        <div class="decor-divider" style="margin-bottom:12px;"></div>
-        <p style="color:#444; line-height:1.65;">
-          Join us to honor <strong>Kuttan</strong> and <strong>Shantha</strong> — celebrating six decades of devoted companionship and the 80th birthday of our beloved Shantha. Their lives together have been stitched with kindness, quiet laughter, and an enduring tenderness that continues to guide us.
-        </p>
-      </section>
-
-      <div class="fade-item">
-        <div class="section-heading">Event Timeline</div>
-        <div class="section-subdivider"></div>
-
-        <div class="timeline-wrap">
-          <div class="timeline" id="timeline">
-            <div class="timeline-line"></div>
-
-            <svg class="blossom" id="blossom" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad1" x1="0" x2="1">
-                  <stop offset="0" stop-color="#f6e7b8"/>
-                  <stop offset="1" stop-color="#cfa64a"/>
-                </linearGradient>
-              </defs>
-              <g transform="translate(32,32)">
-                <circle r="6" fill="url(#grad1)" />
-                <path d="M0 -12 C6 -8 12 -8 12 0 C12 8 6 12 0 12 C-6 12 -12 8 -12 0 C-12 -8 -6 -8 0 -12 Z" fill="#f3d98b"/>
-                <circle r="2.2" fill="#b78b1e"/>
-              </g>
-            </svg>
-
-            <div style="height:18px;"></div>
-            <div class="tl-item tl-left">
-              <div class="tl-time">12:30 PM</div>
-              <div class="tl-desc">Gathering</div>
-            </div>
-            <div class="tl-marker" style="top:62px;"></div>
-
-            <div style="height:40px;"></div>
-            <div class="tl-item tl-right">
-              <div class="tl-time">1:00 PM</div>
-              <div class="tl-desc">Commencement</div>
-            </div>
-            <div class="tl-marker" style="top:200px;"></div>
-
-            <div style="height:40px;"></div>
-            <div class="tl-item tl-left">
-              <div class="tl-time">1:30 PM</div>
-              <div class="tl-desc">Lunch</div>
-            </div>
-            <div class="tl-marker" style="top:350px;"></div>
-
-            <div style="height:40px;"></div>
-            <div class="tl-item tl-right">
-              <div class="tl-time">3:30 PM</div>
-              <div class="tl-desc">Closing</div>
-            </div>
-            <div class="tl-marker" style="top:490px;"></div>
-
-            <div style="height:140px;"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fade-item">
-        <div class="section-heading">Dress Code</div>
-        <div class="section-subdivider"></div>
-
-        <div class="dresscode mt-4">
-          <p style="margin:0 0 .6rem 0; font-style:italic;">
-            Whether in silk or shimmer, velvets or lace — let’s meet in timeless grace.
-          </p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-            <div style="min-width:220px">
-              <div style="font-weight:700;color:#333">Men</div>
-              <div>Beige shirt / kurta and pants</div>
-            </div>
-            <div style="min-width:220px">
-              <div style="font-weight:700;color:#333">Women</div>
-              <div>Gold or beige lehenga / salwar / saree (silk, shimmer, velvet, or lace welcome)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <footer class="text-center mt-6 fade-item" style="color:#6b6b6b;font-size:.95rem;">
-        <div class="decor-divider mx-auto mb-3"></div>
-        <div>With love and gratitude — The Family of Kuttan &amp; Shantha</div>
-      </footer>
-
     </div>
-  </main>
 
+    <!-- Message -->
+    <section class="vintage-text fade-target" id="lifetime">
+      <h2>A Lifetime of Love</h2>
+      <div class="divider" style="margin-top:10px; margin-bottom:12px;"></div>
+      <p style="color:#444; line-height:1.65; margin:0;">
+        Join us to honor <strong>Kuttan</strong> and <strong>Shantha</strong> — celebrating six decades of devoted companionship and the 80th birthday of our beloved Shantha. Their lives together have been stitched with kindness, quiet laughter, and an enduring tenderness that continues to guide us.
+      </p>
+    </section>
+
+    <!-- Photo 2 (below the message) -->
+    <div class="photos" aria-hidden="false">
+      <div class="photo-wrapper fade-target" id="bottomPhoto" style="margin-top:16px;">
+        <img src="photos/photo2.jpg" alt="Couple full body" class="photo photo2" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- Timeline header -->
+    <div class="section-heading fade-target">Event Timeline</div>
+    <div class="section-subdivider fade-target" aria-hidden="true"></div>
+
+    <!-- Timeline -->
+    <div class="timeline-wrap">
+      <div class="timeline" id="timeline">
+
+        <!-- dotted gold center line -->
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <!-- SVG arcs (we will set their path 'd' via JS) -->
+        <svg class="arc" id="arcSVG" width="100%" height="720" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="arcGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#f6e7b8" />
+              <stop offset="1" stop-color="#cfa64a" />
+            </linearGradient>
+          </defs>
+          <path id="arc1" d="" />
+          <path id="arc2" d="" />
+          <path id="arc3" d="" />
+        </svg>
+
+        <!-- blossom (will move along timeline center in JS) -->
+        <svg class="blossom" id="blossom" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#f6e7b8"/>
+              <stop offset="1" stop-color="#cfa64a"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(32,32)">
+            <circle r="6" fill="url(#g1)"/>
+            <path d="M0 -12 C6 -8 12 -8 12 0 C12 8 6 12 0 12 C-6 12 -12 8 -12 0 C-12 -8 -6 -8 0 -12 Z" fill="#f3d98b" />
+            <circle r="2.2" fill="#b78b1e"/>
+          </g>
+        </svg>
+
+        <!-- timeline items spaced vertically to create S shape -->
+        <!-- We'll use fixed blocks with spacing to produce the S curve visually -->
+        <div style="height:28px;"></div>
+
+        <div class="tl-item tl-right fade-target" id="item1" style="margin-top:0;">
+          <div class="tl-time">12:30 PM</div>
+          <div class="tl-desc">Gathering</div>
+        </div>
+        <div class="tl-marker" id="marker1" style="top:78px;"></div>
+
+        <div style="height:96px;"></div>
+
+        <div class="tl-item tl-left fade-target" id="item2" style="margin-top:0;">
+          <div class="tl-time">1:00 PM</div>
+          <div class="tl-desc">Commencement</div>
+        </div>
+        <div class="tl-marker" id="marker2" style="top:240px;"></div>
+
+        <div style="height:96px;"></div>
+
+        <div class="tl-item tl-right fade-target" id="item3" style="margin-top:0;">
+          <div class="tl-time">1:30 PM</div>
+          <div class="tl-desc">Lunch</div>
+        </div>
+        <div class="tl-marker" id="marker3" style="top:400px;"></div>
+
+        <div style="height:96px;"></div>
+
+        <div class="tl-item tl-left fade-target" id="item4" style="margin-top:0;">
+          <div class="tl-time">3:30 PM</div>
+          <div class="tl-desc">Closing</div>
+        </div>
+        <div class="tl-marker" id="marker4" style="top:560px;"></div>
+
+        <div style="height:160px;"></div>
+      </div>
+    </div>
+
+    <!-- Dress Code -->
+    <div class="section-heading fade-target">Dress Code</div>
+    <div class="section-subdivider fade-target"></div>
+
+    <div class="dresscode" id="dress" >
+      <p style="margin:0 0 .6rem 0; font-style:italic;">
+        Whether in silk or shimmer, velvets or lace — let’s meet in timeless grace.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="min-width:220px">
+          <div style="font-weight:700;color:#333">Men</div>
+          <div>Beige shirt / kurta and pants</div>
+        </div>
+        <div style="min-width:220px">
+          <div style="font-weight:700;color:#333">Women</div>
+          <div>Gold or beige lehenga / salwar / saree (silk, shimmer, velvet, or lace welcome)</div>
+        </div>
+      </div>
+    </div>
+
+    <footer style="text-align:center; margin-top:26px; color:#6b6b6b; font-size:.95rem;" class="fade-target">
+      <div class="divider" style="margin:10px auto 12px;"></div>
+      <div>With love and gratitude — The Family of Kuttan &amp; Shantha</div>
+      <div style="height:26px"></div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript: arcs, blossom movement (with wobble), reveal-on-scroll -->
   <script>
-    // Blossom scroll animation
     (function(){
-      const blossom = document.getElementById('blossom');
-      const timeline = document.getElementById('timeline');
-      if (!blossom || !timeline) return;
+      // helper
+      function qs(sel, ctx=document) { return ctx.querySelector(sel); }
+      function qsa(sel, ctx=document) { return Array.from(ctx.querySelectorAll(sel)); }
 
-      function update() {
+      // Fade-in for .fade-target and for tl-items
+      const fadeTargets = qsa('.fade-target');
+      const tlItems = qsa('.tl-item');
+      const dressEl = document.getElementById('dress');
+      const photoWrappers = qsa('.photo-wrapper');
+      const vintageText = document.querySelector('.vintage-text');
+
+      // Intersection Observer for general fade-in elements
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.22});
+
+      fadeTargets.forEach(el => observer.observe(el));
+      tlItems.forEach(el => observer.observe(el));
+      photoWrappers.forEach(el => observer.observe(el));
+      if (vintageText) observer.observe(vintageText);
+      if (dressEl) observer.observe(dressEl);
+      // timeline markers reveal separately (we'll keep them visible always)
+
+      // Build arcs between markers programmatically
+      function setArcs(){
+        const svg = qs('#arcSVG');
+        if(!svg) return;
+        // get timeline top-left coordinates and center
+        const timeline = qs('#timeline');
+        const rect = timeline.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        // map marker elements
+        const markers = [
+          qs('#marker1'),
+          qs('#marker2'),
+          qs('#marker3'),
+          qs('#marker4')
+        ];
+        const arcPaths = [qs('#arc1'), qs('#arc2'), qs('#arc3')];
+
+        // convert page positions into svg coordinates (svg uses width 1000 x height 720)
+        const vw = svg.viewBox.baseVal.width || 1000;
+        const vh = svg.viewBox.baseVal.height || 720;
+
+        function pageToSvg(x,y){
+          // x: page coordinate; y: page coordinate
+          const bbox = timeline.getBoundingClientRect();
+          // relative x within timeline container
+          const relX = (x - bbox.left) / bbox.width; // 0..1
+          const relY = (y - bbox.top) / bbox.height; // 0..1
+          return { sx: relX * vw, sy: relY * vh };
+        }
+
+        // compute centers for each marker
+        const centers = markers.map(m => {
+          if(!m) return null;
+          const mRect = m.getBoundingClientRect();
+          const cx = mRect.left + mRect.width/2;
+          const cy = mRect.top + mRect.height/2;
+          return {x:cx, y:cy};
+        });
+
+        // arcs connect marker1 -> marker2, marker2 -> marker3, marker3 -> marker4
+        for(let i=0;i<3;i++){
+          const a = centers[i], b = centers[i+1];
+          const p = arcPaths[i];
+          if(!a || !b || !p) { p.setAttribute('d', ''); continue; }
+          const pa = pageToSvg(a.x, a.y);
+          const pb = pageToSvg(b.x, b.y);
+          // create a smooth cubic bezier with control points offset horizontally to create S flow
+          // compute midpoints and offsets
+          const mx = (pa.sx + pb.sx)/2;
+          const my = (pa.sy + pb.sy)/2;
+          // horizontal offset depends on left/right alternation
+          const offsetX = ( (i % 2) === 0 ? -120 : 120 ); // alternate sign
+          // control points
+          const c1x = pa.sx + offsetX;
+          const c1y = pa.sy + (my - pa.sy)*0.6;
+          const c2x = pb.sx - offsetX;
+          const c2y = pb.sy - (pb.sy - my)*0.6;
+          // path
+          const d = `M ${pa.sx.toFixed(2)} ${pa.sy.toFixed(2)} C ${c1x.toFixed(2)} ${c1y.toFixed(2)} ${c2x.toFixed(2)} ${c2y.toFixed(2)} ${pb.sx.toFixed(2)} ${pb.sy.toFixed(2)}`;
+          p.setAttribute('d', d);
+        }
+      }
+
+      // blossom motion: descend along timeline center while wobbling side-to-side
+      function updateBlossom(){
+        const blossom = qs('#blossom');
+        const timeline = qs('#timeline');
+        if(!blossom || !timeline) return;
         const rect = timeline.getBoundingClientRect();
         const viewH = window.innerHeight || document.documentElement.clientHeight;
         const pageTop = window.scrollY || window.pageYOffset;
         const viewportCenter = pageTop + viewH * 0.45;
-        const timelineTopPage = rect.top + pageTop;
-        const timelineHeight = rect.height || 1;
-        let progress = (viewportCenter - timelineTopPage) / timelineHeight;
+        const topPage = rect.top + pageTop;
+        const height = rect.height || 1;
+        let progress = (viewportCenter - topPage) / height;
         progress = Math.max(0, Math.min(1, progress));
-        const y = progress * rect.height;
-        blossom.style.transform = `translate(-50%, ${y - 18}px) rotate(${progress * 360}deg)`;
-        blossom.style.opacity = (0.95 - progress * 0.5);
+        // base Y inside timeline element
+        const localY = progress * rect.height;
+        // wobble: amplitude decreases slightly as it moves down
+        const amplitude = 28 * (1 - progress*0.3); // px
+        // wobble frequency: depends on scroll distance - use progress to compute phase
+        const phase = progress * Math.PI * 4; // 2 full waves across whole length
+        const wobble = Math.sin(phase) * amplitude;
+        // place blossom: center x of timeline plus wobble
+        // compute timeline center x
+        const centerX = rect.left + rect.width/2;
+        // set blossom absolute position
+        blossom.style.left = (centerX + wobble) + 'px';
+        blossom.style.top = (rect.top + localY - 18) + 'px';
+        // rotate slightly as it drifts
+        blossom.style.transform = `translate(-50%, -12px) rotate(${progress * 420}deg)`;
+        blossom.style.opacity = (0.98 - progress*0.55);
       }
 
+      // reposition markers, arcs, and blossom on resize / load
+      function recalc(){
+        setArcs();
+        updateBlossom();
+      }
+      window.addEventListener('resize', recalc);
+      window.addEventListener('load', recalc);
+
+      // update on scroll (throttled with rAF)
       let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => { update(); ticking = false; });
+      window.addEventListener('scroll', function(){
+        if(!ticking){
+          window.requestAnimationFrame(function(){
+            updateBlossom();
+            ticking = false;
+          });
         }
         ticking = true;
       }, {passive:true});
-      window.addEventListener('load', update);
-      window.addEventListener('resize', update);
-    })();
 
-    // Fade-in on scroll
-    const fadeItems = document.querySelectorAll('.fade-item');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+      // initial: set arcs after small delay to allow layout to settle
+      setTimeout(setArcs, 350);
+      setTimeout(recalc, 600);
+
+      // Also observe DOM changes (if images load and change heights)
+      const ro = new ResizeObserver(() => {
+        setArcs();
+        updateBlossom();
       });
-    }, { threshold: 0.25 });
+      const timelineEl = qs('#timeline');
+      if (timelineEl) ro.observe(timelineEl);
 
-    fadeItems.forEach(item => observer.observe(item));
+      // Additional: reveal tl-items as they come into view from either side
+      const tlObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.25});
+      qsa('.tl-item').forEach(i => tlObserver.observe(i));
+    })();
   </script>
-
 </body>
 </html>
