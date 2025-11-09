@@ -6,9 +6,8 @@
   <title>Antony & Shantha — 60th Anniversary & 80th Birthday</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* --- Custom Gold & Vintage Styling --- */
+    /* === GOLD & VINTAGE STYLE === */
     .gold { color: #b78b1e; }
-    .gold-light { color: #d4af37; }
     .gold-border { border-color: rgba(183,139,30,0.4); }
     .vintage-filter { filter: sepia(0.08) contrast(1.05) brightness(1.02); }
     .soft-shadow { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
@@ -19,15 +18,43 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Background: Aged Paper Texture --- */
+    /* === BACKGROUND (aged paper texture) === */
     body {
       background-color: #fdfbf7;
       background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
                         url('https://www.transparenttextures.com/patterns/paper-fibers.png');
       background-size: 6px 6px, 400px 400px;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
-    /* --- Decorative Divider --- */
+    /* === FLOATING FLOWER (scroll-triggered) === */
+    .floating-flower {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(0deg);
+      width: 60px;
+      opacity: 0.8;
+      pointer-events: none;
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    }
+
+    /* === ORNAMENTS === */
+    .ornament-top, .ornament-bottom {
+      position: absolute;
+      width: 120px;
+      height: 30px;
+      background: no-repeat center/contain url('https://upload.wikimedia.org/wikipedia/commons/9/9f/Vintage_decorative_flourish.svg');
+      opacity: 0.15;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .ornament-top { top: -40px; rotate: 180deg; }
+    .ornament-bottom { bottom: -40px; }
+
+    /* === Decorative Divider === */
     .divider {
       display: inline-block;
       width: 80px;
@@ -36,14 +63,23 @@
       opacity: 0.85;
     }
   </style>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body class="text-gray-800 antialiased selection:bg-yellow-100 selection:text-yellow-900">
-  <main class="min-h-screen flex items-center justify-center py-12 px-6">
-    <div class="max-w-3xl w-full bg-white/90 rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm">
 
-      <!-- Header -->
+  <!-- FLOATING FLOWER -->
+  <img src="photos/flower.png" alt="Floating flower" class="floating-flower" id="floatingFlower">
+
+  <main class="min-h-screen flex items-center justify-center py-12 px-6 relative">
+    <div class="max-w-3xl w-full bg-white/90 rounded-3xl border gold-border soft-shadow p-8 md:p-12 fade-in backdrop-blur-sm relative overflow-hidden">
+
+      <!-- ornamental decorations -->
+      <div class="ornament-top"></div>
+      <div class="ornament-bottom"></div>
+
+      <!-- HEADER -->
       <header class="text-center mb-8">
         <h1 class="text-4xl md:text-5xl elegant gold">Antony &amp; Shantha</h1>
         <p class="mt-2 text-lg md:text-xl text-gray-700 italic">
@@ -55,13 +91,13 @@
         <div class="mt-5 divider mx-auto"></div>
       </header>
 
-      <!-- Photo Section -->
+      <!-- PHOTO -->
       <div class="rounded-2xl overflow-hidden vintage-filter mb-8 soft-shadow">
         <img src="photos/photo1.jpg" alt="Antony & Shantha" class="w-full h-72 object-cover">
       </div>
 
-      <!-- Message -->
-      <section class="text-center">
+      <!-- MESSAGE -->
+      <section class="text-center relative">
         <h2 class="text-2xl md:text-3xl elegant gold mb-4">A Lifetime of Love</h2>
         <div class="divider mx-auto mb-4"></div>
         <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">
@@ -72,7 +108,7 @@
         </p>
       </section>
 
-      <!-- Details -->
+      <!-- DETAILS -->
       <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
         <div class="border border-gray-200 rounded-xl py-4 bg-white/60">
           <h3 class="text-sm uppercase text-gray-500 tracking-wider">When</h3>
@@ -84,7 +120,7 @@
         </div>
       </section>
 
-      <!-- Buttons -->
+      <!-- BUTTONS -->
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href="mailto:rsvp@family.com?subject=RSVP%20-%20Antony%20%26%20Shantha"
            class="px-6 py-3 rounded-lg border border-yellow-500 bg-yellow-50 text-yellow-800 font-medium hover:bg-yellow-100 transition">
@@ -96,7 +132,7 @@
         </button>
       </div>
 
-      <!-- Dress Code -->
+      <!-- DRESS CODE -->
       <div class="mt-8 text-sm text-gray-600 text-center">
         <p><strong>Dress Code:</strong> Gold &amp; White — Vintage Elegant</p>
         <p class="mt-2 max-w-xl mx-auto">
@@ -105,13 +141,25 @@
         </p>
       </div>
 
-      <!-- Footer -->
+      <!-- FOOTER -->
       <footer class="mt-10 text-center text-gray-500 text-sm italic">
         <div class="divider mx-auto mb-3"></div>
         <p>With love and gratitude — The Family of Antony &amp; Shantha</p>
       </footer>
-
     </div>
   </main>
+
+  <!-- SCROLL SCRIPT -->
+  <script>
+    const flower = document.getElementById('floatingFlower');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const rotate = scrollY / 4; // rotate slower
+      const translateY = scrollY * 0.6; // move gently down
+      const opacity = Math.max(0.2, 1 - scrollY / 800);
+      flower.style.transform = `translateX(-50%) translateY(${translateY}px) rotate(${rotate}deg)`;
+      flower.style.opacity = opacity;
+    });
+  </script>
 </body>
 </html>
