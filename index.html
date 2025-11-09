@@ -28,9 +28,8 @@
     }
     .playfair { font-family: 'Playfair Display', serif; }
     .cinzel-light { font-family: 'Cinzel Decorative', cursive; font-weight: 400; }
-    .text-gold { color: var(--gold-dark); }
 
-    /* Screenshot-perfect "60 Years..." */
+    /* Screenshot-perfect 60 Years */
     .subtitle-60years {
       font-family: 'Playfair Display', serif;
       font-weight: 400;
@@ -76,240 +75,43 @@
       color: var(--gold);
     }
 
-    /* Tilda-style dotted golden line */
-    .timeline::before {
-      content: '';
+    /* S-shaped dotted trail + glowing bullets */
+    .timeline-container {
+      position: relative;
+    }
+    .timeline-path {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      width: 4px;
+      height: calc(100% - 100px);
+      transform: translateX(-50%);
+      background: repeating-linear-gradient(to bottom, var(--gold-dark) 0, var(--gold-dark) 12px, transparent 12px, transparent 24px);
+      opacity: 0.5;
+      z-index: 1;
+      border-radius: 2px;
+    }
+    .timeline-bullet {
       position: absolute;
       left: 50%;
-      top: 0;
-      width: 2px;
-      height: 100%;
-      background: repeating-linear-gradient(to bottom, var(--gold-dark) 0, var(--gold-dark) 10px, transparent 10px, transparent 20px);
       transform: translateX(-50%);
-      opacity: 0.6;
-      z-index: 1;
+      width: 14px;
+      height: 14px;
+      background: var(--gold-light);
+      border: 3px solid var(--gold-dark);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+      z-index: 9;
     }
     @media (max-width: 768px) {
-      .timeline::before { left: 36px; }
+      .timeline-path, .timeline-bullet { left: 36px; }
     }
 
-    /* Your paperplane.png – floating magic */
+    /* Paper plane */
     #paper-plane {
       position: absolute;
-      width: 56px;
-      height: 56px;
+      width: 64px;
+      height: 64px;
       pointer-events: none;
       z-index: 10;
-      filter: drop-shadow(0 8px 16px rgba(184,134,11,0.3));
-      opacity: 0.95;
-      transition: transform 0.1s ease-out;
-    }
-    @media (max-width: 768px) {
-      #paper-plane { left: 36px !important; }
-    }
-  </style>
-</head>
-<body class="min-h-screen">
-
-  <div class="fixed inset-0 opacity-10 pointer-events-none">
-    <img src="https://svgur.com/i/11e5.svg" class="w-full h-full object-cover" alt="">
-  </div>
-
-  <div class="max-w-4xl mx-auto px-6 py-12 relative">
-
-    <!-- Tilda Paper-Plane – uses YOUR photos/paperplane.png -->
-    <img id="paper-plane" src="photos/paperplane.png" alt="Paper Plane" onerror="this.style.display='none'">
-
-    <div class="gold-frame my-12">
-      <div class="inner-card p-10 md:p-16">
-
-        <!-- Header -->
-        <header class="text-center mb-16">
-          <h1 class="cinzel-light text-5xl md:text-7xl text-gold mb-8 tracking-wide leading-snug">
-            Kuttan & Shantha
-          </h1>
-          
-          <p class="subtitle-60years mb-10">
-            60 Years of Love & Shantha’s 80th Birthday
-          </p>
-          
-          <div class="divider"></div>
-          <p class="text-2xl md:text-3xl playfair font-medium">DEAR FAMILY AND FRIENDS</p>
-        </header>
-
-        <!-- Bilingual Message -->
-        <section class="grid md:grid-cols-2 gap-10 mb-16 text-lg leading-relaxed">
-          <div class="bg-white/80 p-8 rounded-2xl border border-gold/20 shadow-lg">
-            <p class="mb-6">
-              Six decades of togetherness, countless shared sunsets, and now — Shantha’s 80th bloom. 
-              This December, we gather to wrap our beloved Kuttan & Shantha in golden love.
-            </p>
-            <p>Your presence will make this milestone shimmer brighter than ever.</p>
-          </div>
-          <div class="bg-white/80 p-8 rounded-2xl border border-gold/20 shadow-lg" dir="rtl" lang="ml">
-            <p class="mb-6">
-              അറുപതു വർഷത്തെ പ്രണയം, അനേകം പങ്കിട്ട സന്ധ്യകൾ, ഇപ്പോൾ ഷാന്താമ്മയുടെ 80-ാം പിറന്നാൾ.
-            </p>
-            <p>
-              ഈ ഡിസംബറിൽ, കുട്ടനേട്ടനെയും ഷാന്താമ്മയെയും സ്വർണ്ണ പ്രണയത്തിൽ പൊതിയാൻ ഞങ്ങൾ ഒത്തുകൂടുന്നു.
-              നിങ്ങളുടെ സാന്നിധ്യം ഈ നാഴികക്കല്ലിനെ ഇനിയും തിളങ്ങുമാക്കും.
-            </p>
-          </div>
-        </section>
-
-        <!-- Photos -->
-        <div class="grid md:grid-cols-2 gap-10 mb-16">
-          <img src="photos/photo1.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
-          <img src="photos/photo2.jpg" alt="Kuttan & Shantha" class="w-full rounded-2xl object-cover shadow-2xl hover:scale-[1.03] transition-transform" onerror="this.style.display='none'">
-        </div>
-
-        <!-- Date & Venue -->
-        <div class="text-center mb-16">
-          <div class="flex items-center justify-center gap-5 mb-8">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#b89f6e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <p class="text-3xl md:text-4xl playfair">23 December 2025</p>
-          </div>
-
-          <div class="flex items-center justify-center gap-5">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#b89f6e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <p class="text-2xl playfair">
-              <a href="https://maps.app.goo.gl/dsDFV8iDe9HcBAdm8" target="_blank" rel="noopener"
-                 class="border-b border-gold/40 hover:border-gold-dark transition pb-1">
-                7th Floor, Regent Hall, The Avenue Regent, Kochi
-              </a>
-            </p>
-          </div>
-          <div class="divider mt-12"></div>
-        </div>
-
-        <!-- Timeline -->
-        <section class="mb-20">
-          <h2 class="text-center text-4xl playfair text-gold-dark mb-12">Event Timeline</h2>
-          <div class="relative timeline">
-            <div class="space-y-28 md:space-y-36">
-              <div class="flex items-center justify-end md:justify-start">
-                <div class="w-6 h-6 bg-gold-light rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-white shadow-lg z-10"></div>
-                <div class="ml-12 md:ml-0 md:mr-12 bg-white/90 p-6 rounded-xl border border-gold/30 w-full md:w-5/12 text-right md:text-left shadow-md">
-                  <p class="text-2xl text-gold-dark font-bold">12:30 PM</p>
-                  <p>Gathering & Welcome</p>
-                </div>
-              </div>
-              <div class="flex items-center justify-start">
-                <div class="w-6 h-6 bg-gold-light rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-white shadow-lg z-10"></div>
-                <div class="mr-12 md:mr-0 md:ml-12 bg-white/90 p-6 rounded-xl border border-gold/30 w-full md:w-5/12 shadow-md">
-                  <p class="text-2xl text-gold-dark font-bold">1:00 PM</p>
-                  <p>Ceremony & Tributes</p>
-                </div>
-              </div>
-              <div class="flex items-center justify-end md:justify-start">
-                <div class="w-6 h-6 bg-gold-light rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-white shadow-lg z-10"></div>
-                <div class="ml-12 md:ml-0 md:mr-12 bg-white/90 p-6 rounded-xl border border-gold/30 w-full md:w-5/12 text-right md:text-left shadow-md">
-                  <p class="text-2xl text-gold-dark font-bold">1:30 PM</p>
-                  <p>Lunch & Celebration</p>
-                </div>
-              </div>
-              <div class="flex items-center justify-start">
-                <div class="w-6 h-6 bg-gold-light rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-white shadow-lg z-10"></div>
-                <div class="mr-12 md:mr-0 md:ml-12 bg-white/90 p-6 rounded-xl border border-gold/30 w-full md:w-5/12 shadow-md">
-                  <p class="text-2xl text-gold-dark font-bold">3:30 PM</p>
-                  <p>Closing & Group Photos</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Dress Code -->
-        <section class="my-20 p-10 bg-white/90 rounded-2xl border border-gold/30 shadow-lg">
-          <h2 class="text-center text-4xl playfair text-gold-dark mb-8">DRESS CODE</h2>
-          <p class="text-center italic text-lg mb-8 leading-relaxed">
-            Whether in silk or shimmer, linen or lace — come wrapped in warm golds and soft beiges, 
-            like sunlight on vintage parchment, as if you’ve stepped out of a 60-year-old love story.
-          </p>
-          <p class="text-center mb-10" lang="ml">
-            പട്ടിലോ മിന്നലിലോ, ലിനനിലോ ലേസിലോ — ചൂടുള്ള സ്വർണ്ണവും മൃദുല ബീജും ധരിച്ച് വരൂ, 
-            പഴയ കടലാസിലെ സൂര്യപ്രകാശം പോലെ, 60 വർഷം പഴക്കമുള്ള പ്രണയ കഥയിൽ നിന്ന് ഇറങ്ങിവന്നതുപോലെ.
-          </p>
-          <div class="grid md:grid-cols-2 gap-10 text-center">
-            <div class="p-6 bg-gold/10 rounded-xl">
-              <p class="text-2xl text-gold-dark mb-3 font-bold">Men</p>
-              <p>Beige shirt / kurta and pant</p>
-            </div>
-            <div class="p-6 bg-gold/10 rounded-xl">
-              <p class="text-2xl text-gold-dark mb-3 font-bold">Women</p>
-              <p>Gold or beige lehenga / salwar / saree<br>(silk, shimmer, velvet, or lace welcome)</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="text-center mt-24">
-          <div class="divider"></div>
-          <p class="playfair text-3xl text-gold-dark mb-6">
-            With love and gratitude
-          </p>
-          <p class="text-2xl playfair">The Lizzlynn Family</p>
-        </footer>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Tilda Paper-Plane Floating Animation -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const plane = document.getElementById('paper-plane');
-      const timeline = document.querySelector('.timeline');
-      if (!plane || !timeline) return;
-
-      const updatePlane = () => {
-        const rect = timeline.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const scrollTop = window.scrollY;
-        const timelineTop = rect.top + scrollTop;
-        const timelineHeight = rect.height;
-
-        let progress = (scrollTop + windowHeight * 0.55 - timelineTop) / timelineHeight;
-        progress = Math.max(0, Math.min(1, progress));
-
-        const centerX = rect.left + rect.width / 2;
-        const wobble = Math.sin(progress * Math.PI * 6) * 22;
-        const tilt = Math.sin(progress * Math.PI * 3) * 12;
-        const y = rect.top + progress * timelineHeight - 40;
-
-        plane.style.left = (centerX + wobble) + 'px';
-        plane.style.top = y + 'px';
-        plane.style.transform = `rotate(${tilt}deg) scale(${0.9 + progress * 0.2})`;
-        plane.style.opacity = 0.95 - progress * 0.5;
-      };
-
-      window.addEventListener('scroll', () => requestAnimationFrame(updatePlane));
-      window.addEventListener('resize', updatePlane);
-      updatePlane();
-
-      // Fade-in on scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
-          }
-        });
-      }, { threshold: 0.15 });
-
-      document.querySelectorAll('section, header > *, .inner-card > *, img:not(#paper-plane)').forEach(el => {
-        el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-1000', 'ease-out');
-        observer.observe(el);
-      });
-    });
-  </script>
-</body>
-</html>
+      filter: drop-shadow(0 10px 20px rgba(184,134,
